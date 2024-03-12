@@ -49,7 +49,7 @@ specifiers:
   wtbx-vite-build-drop-log: ^1.0.0
   wtbx-vite-i18n: ^1.0.1
   wtbx-vite-inject-env: ^1.0.1
-  wtbx-vite-mock-apis: ^1.0.0
+  wtbx-vite-mock-apis: ^1.1.1
   wtbx-vite-page-routes: ^1.0.2
 
 dependencies:
@@ -103,7 +103,7 @@ devDependencies:
   wtbx-vite-build-drop-log: 1.0.0_vite@5.1.6
   wtbx-vite-i18n: 1.0.1_vite@5.1.6
   wtbx-vite-inject-env: 1.0.1_vite@5.1.6
-  wtbx-vite-mock-apis: 1.0.0_uj5bb2u63f4ial3woygha6q46a
+  wtbx-vite-mock-apis: 1.1.1_uj5bb2u63f4ial3woygha6q46a
   wtbx-vite-page-routes: 1.0.2_liiuylxhdlyjn2srdvtzssnoqe
 
 packages:
@@ -4739,8 +4739,8 @@ packages:
       vite: 5.1.6_@types+node@20.11.26
     dev: true
 
-  /wtbx-vite-mock-apis/1.0.0_uj5bb2u63f4ial3woygha6q46a:
-    resolution: {integrity: sha512-qjcZ9OKD6ZpmEiHojhEZBGdx6RNFhph1sC1qykeKD5K86eYh9lCymqmtr6Q/eH/YsW8LRLu7nsAhP816y8vE0g==}
+  /wtbx-vite-mock-apis/1.1.1_uj5bb2u63f4ial3woygha6q46a:
+    resolution: {integrity: sha512-OnB9toibVtt8eciPDDbNJ/L8/58HZgFXchziyXGPnh5/xypDK6Xb4QZILJLXMM8pihJhzuc0FDrW7Py/mIlQNQ==}
     peerDependencies:
       body: ^5.x.x
       query-string: ^8.x.x
