@@ -5,7 +5,7 @@ import '@/app.css'
 import {envConfig} from "~env-config";
 
 function Page () {
-  const [count, setCount] = useState(0)
+      const [count, setCount] = useState(0)
 
   return (
     <>
