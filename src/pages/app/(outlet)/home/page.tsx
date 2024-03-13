@@ -2,21 +2,14 @@ import reactLogo from '@/assets/react.svg'
 import viteLogo from '/vite.svg'
 import '@/app.css'
 import { envConfig } from '~env-config'
-import resso from 'resso'
+import { watom } from 'wtbx-react-atom'
 
-let _color = 0 as 0 | 1
-const store = resso({
-	count: 0,
-	get color() {
-		return _color
-	},
-	set color(v) {
-		_color = v
-	},
-})
+const $color = watom(0 as 0 | 1)
+const $count = watom(0 as number)
 
 function CountNumber() {
-	const { count } = store
+	const count = $count.use
+
 	return (
 		<span>
 			{count} count: {Math.random()}
@@ -28,7 +21,7 @@ function CountBtn() {
 	return (
 		<div>
 			<div>CountBtn: {Math.random()}</div>
-			<button onClick={() => store('count', e => e + 1)}>
+			<button onClick={() => $count(e => e + 1)}>
 				count is <CountNumber />
 			</button>
 		</div>
@@ -38,14 +31,14 @@ function CountBtn() {
 function ChangeColorBtn() {
 	return (
 		<div>
-			<button onClick={() => store('color', e => (e === 0 ? 1 : 0))}>更改顏色</button>
+			<button onClick={() => $color(e => (e === 0 ? 1 : 0))}>更改顏色</button>
 			<div>ChangeColorBtn: {Math.random()}</div>
 		</div>
 	)
 }
 
 function Title() {
-	const { color } = store
+	const color = $color.use
 
 	return (
 		<div>
@@ -59,12 +52,10 @@ function ResetStore() {
 	return (
 		<div>
 			<button
-				onClick={() =>
-					store({
-						count: 0,
-						color: 0,
-					})
-				}
+				onClick={() => {
+					$count(0)
+					$color(0)
+				}}
 			>
 				重置狀態
 			</button>

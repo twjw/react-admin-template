@@ -32,7 +32,6 @@ specifiers:
   react-dom: ^18.2.0
   react-error-boundary: ^4.0.11
   react-router-dom: ^6.3.0
-  resso: ^0.17.0
   typescript: ^5.2.2
   unocss: 0.58.2
   vite: ^5.1.6
@@ -43,6 +42,7 @@ specifiers:
   wtbx-enum: ^1.0.0
   wtbx-fetch-plus: ^1.0.7
   wtbx-merge-env: ^1.0.1
+  wtbx-react-atom: ^1.0.0
   wtbx-types: ^1.0.3
   wtbx-uno-preset-rem: ^1.0.1
   wtbx-vite-auto-alias: ^1.0.1
@@ -50,7 +50,7 @@ specifiers:
   wtbx-vite-i18n: ^1.0.1
   wtbx-vite-inject-env: ^1.0.1
   wtbx-vite-mock-apis: ^1.1.1
-  wtbx-vite-page-routes: ^1.0.2
+  wtbx-vite-react-page-routes: ^1.0.3
 
 dependencies:
   antd: 5.15.2_biqbaboplfbrettd7655fr4n2y
@@ -64,10 +64,9 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-error-boundary: 4.0.13_react@18.2.0
   react-router-dom: 6.22.3_biqbaboplfbrettd7655fr4n2y
-  resso: 0.17.0_react@18.2.0
   wtbx-create-value-storage: 1.0.0
   wtbx-enum: 1.0.0
-  wtbx-fetch-plus: 1.0.7_btoigd27faj6byokxmdsv5iuam
+  wtbx-fetch-plus: 1.0.7_@types+clone-deep@4.0.4
 
 devDependencies:
   '@faker-js/faker': 8.4.1
@@ -96,15 +95,16 @@ devDependencies:
   vite-plugin-checker: 0.6.4_ijazftkzg6d7emd2jpcld7a6sa
   vite-plugin-html: 3.2.2_vite@5.1.6
   vite-plugin-svgr: 4.2.0_ebtatjq6ttctxp6n66bixf3nue
-  wtbx-merge-env: 1.0.1_lodash-es@4.17.21
+  wtbx-merge-env: 1.0.1
+  wtbx-react-atom: 1.0.0
   wtbx-types: 1.0.3
-  wtbx-uno-preset-rem: 1.0.1_@unocss+core@0.58.5
-  wtbx-vite-auto-alias: 1.0.1_vite@5.1.6
-  wtbx-vite-build-drop-log: 1.0.0_vite@5.1.6
-  wtbx-vite-i18n: 1.0.1_vite@5.1.6
-  wtbx-vite-inject-env: 1.0.1_vite@5.1.6
-  wtbx-vite-mock-apis: 1.1.1_uj5bb2u63f4ial3woygha6q46a
-  wtbx-vite-page-routes: 1.0.2_liiuylxhdlyjn2srdvtzssnoqe
+  wtbx-uno-preset-rem: 1.0.1
+  wtbx-vite-auto-alias: 1.0.1_@types+node@20.11.26
+  wtbx-vite-build-drop-log: 1.0.0_@types+node@20.11.26
+  wtbx-vite-i18n: 1.0.1_@types+node@20.11.26
+  wtbx-vite-inject-env: 1.0.1_@types+node@20.11.26
+  wtbx-vite-mock-apis: 1.1.1_@types+node@20.11.26
+  wtbx-vite-react-page-routes: 1.0.3_@types+node@20.11.26
 
 packages:
 
@@ -1610,6 +1610,10 @@ packages:
 
   /@unocss/core/0.58.2:
     resolution: {integrity: sha512-TYU6IRgnsZGVXpca6FYuXa3iJ1zI3hxgRhnb7TwE9j5t2GY4a/mjvg0K3MdiC8rzPP5hWWd9NXivBfJsr1SQpQ==}
+    dev: true
+
+  /@unocss/core/0.58.3:
+    resolution: {integrity: sha512-9hTxzsrSLh+07ql/lGhE+8ZbE9MTTeZeMx131cPf2jDJUxAZooLE5pBCoK0k77ZJGcribRrwPGkUScBNOK0cYQ==}
     dev: true
 
   /@unocss/core/0.58.5:
@@ -4060,15 +4064,6 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /resso/0.17.0_react@18.2.0:
-    resolution: {integrity: sha512-KbJ9eUQabJawXP3A/6V24GgqVlcg5Air5k8B43bbRjsqp8FgiH1DOH8OnGzMbK7moBYRoe47TqCYjj38SagQRw==}
-    peerDependencies:
-      react: '>=16.8.0'
-    dependencies:
-      react: 18.2.0
-      use-sync-external-store: 1.2.0_react@18.2.0
-    dev: false
-
   /restore-cursor/4.0.0:
     resolution: {integrity: sha512-I9fPXU9geO9bHOt9pHHOhOkYerIMsmVaWB0rA2AI9ERh/+x/i7MV5HKBNrg+ljO5eoPVgCcnFuRjJ9uH6I/3eg==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
@@ -4476,14 +4471,6 @@ packages:
       punycode: 2.3.1
     dev: true
 
-  /use-sync-external-store/1.2.0_react@18.2.0:
-    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      react: 18.2.0
-    dev: false
-
   /vite-plugin-checker/0.6.4_ijazftkzg6d7emd2jpcld7a6sa:
     resolution: {integrity: sha512-2zKHH5oxr+ye43nReRbC2fny1nyARwhxdm0uNYp/ERy4YvU9iZpNOsueoi/luXw5gnpqRSvjcEPxXbS153O2wA==}
     engines: {node: '>=14.16'}
@@ -4675,94 +4662,127 @@ packages:
     resolution: {integrity: sha512-Ggx4CfsXHw6eNfgduzWVF2bOcAxVlzkmhAc9ItCDsGBTCffikK0SqJGWUeovWH9pv8Z+ai+XAL5gTaDdd+ub1g==}
     dev: false
 
-  /wtbx-fetch-plus/1.0.7_btoigd27faj6byokxmdsv5iuam:
+  /wtbx-fetch-plus/1.0.7_@types+clone-deep@4.0.4:
     resolution: {integrity: sha512-f+PaNTGtWbxUzhXNN7XW0Qy/AaAYHbfCF/oVfLQgICyBBTxg20BcGTZGuDGJZUXRzSSob+gt7tZd4waYM38wKw==}
     peerDependencies:
       '@types/clone-deep': ^4.x.x
-      query-string: ^8.x.x
     dependencies:
       '@types/clone-deep': 4.0.4
       clone-deep: 4.0.1
       query-string: 8.2.0
     dev: false
 
-  /wtbx-merge-env/1.0.1_lodash-es@4.17.21:
+  /wtbx-merge-env/1.0.1:
     resolution: {integrity: sha512-pAtJV28dwZOdE3uugjAU4E7YwGhs05W70UHQ/nzu1L3Hma6xLpLW/Rw56facFzp18SoNMyWrRjJsgEocEVJxfw==}
-    peerDependencies:
-      lodash-es: ^4.x.x
     dependencies:
       lodash-es: 4.17.21
+    dev: true
+
+  /wtbx-react-atom/1.0.0:
+    resolution: {integrity: sha512-p8/oV/APpOAmmPXwZcQAlqUWKCbTS3YgnSnKbQ6XtwRMw/9r2evD9pD2yOUreHWlsLpveKKNGQoT5yAHqOWU9A==}
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: true
 
   /wtbx-types/1.0.3:
     resolution: {integrity: sha512-b0gD+0zvQo/yfIcsJ0Hv4VCjQAbdjOmNrykdnHVJQfU5PzGEvsEOj6Y3voDjRTegBebwV0lTDdHfxVeeLd1Ucw==}
     dev: true
 
-  /wtbx-uno-preset-rem/1.0.1_@unocss+core@0.58.5:
+  /wtbx-uno-preset-rem/1.0.1:
     resolution: {integrity: sha512-utmCMgLa2GKVYhrR6dR2JY6oosoPsPo8NLj+r5a6/cwtYpL4wIKBNx87KP+IXbeXyCLkulahjUj2fB3XmVyqHA==}
-    peerDependencies:
-      '@unocss/core': 0.x.x
     dependencies:
-      '@unocss/core': 0.58.5
+      '@unocss/core': 0.58.3
     dev: true
 
-  /wtbx-vite-auto-alias/1.0.1_vite@5.1.6:
+  /wtbx-vite-auto-alias/1.0.1_@types+node@20.11.26:
     resolution: {integrity: sha512-ZU4exp8K2eiUREuf029mvyaE5VpOFBIvF73iMnKpsazVXqptNGrtIOjQscWyjSH+VQgG6J25y6yO57F+0+lL7w==}
-    peerDependencies:
-      vite: ^5.x.x
     dependencies:
       jsonc-parser: 3.2.1
       vite: 5.1.6_@types+node@20.11.26
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - lightningcss
+      - sass
+      - stylus
+      - sugarss
+      - terser
     dev: true
 
-  /wtbx-vite-build-drop-log/1.0.0_vite@5.1.6:
+  /wtbx-vite-build-drop-log/1.0.0_@types+node@20.11.26:
     resolution: {integrity: sha512-trU38n7J75AU4x5wlwPJQkR071jF2EsvHexEyZMlW565QsGH0ZMmVDSsvY4Ipjn8aXm2CsHE16+1/o6At6KSXQ==}
-    peerDependencies:
-      vite: ^5.x.x
     dependencies:
       vite: 5.1.6_@types+node@20.11.26
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - lightningcss
+      - sass
+      - stylus
+      - sugarss
+      - terser
     dev: true
 
-  /wtbx-vite-i18n/1.0.1_vite@5.1.6:
+  /wtbx-vite-i18n/1.0.1_@types+node@20.11.26:
     resolution: {integrity: sha512-avWs1hIDBTjmEDUI1xsUfJYaFQh8NWXLkek8z82f/g1XFT7GfU90cZES54NdHSxYyUiJ2JR0j18AZxwCTecnQw==}
-    peerDependencies:
-      vite: ^5.x.x
     dependencies:
       vite: 5.1.6_@types+node@20.11.26
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - lightningcss
+      - sass
+      - stylus
+      - sugarss
+      - terser
     dev: true
 
-  /wtbx-vite-inject-env/1.0.1_vite@5.1.6:
+  /wtbx-vite-inject-env/1.0.1_@types+node@20.11.26:
     resolution: {integrity: sha512-Ad+sKchE1j2hJXl4n82g+dQsCYE5nVRREutFw30juYpXNP+pY9tU6QchB8k/jeBuxRPVx52LLpQa/jsYzfTUSQ==}
-    peerDependencies:
-      vite: ^5.x.x
     dependencies:
       vite: 5.1.6_@types+node@20.11.26
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - lightningcss
+      - sass
+      - stylus
+      - sugarss
+      - terser
     dev: true
 
-  /wtbx-vite-mock-apis/1.1.1_uj5bb2u63f4ial3woygha6q46a:
+  /wtbx-vite-mock-apis/1.1.1_@types+node@20.11.26:
     resolution: {integrity: sha512-OnB9toibVtt8eciPDDbNJ/L8/58HZgFXchziyXGPnh5/xypDK6Xb4QZILJLXMM8pihJhzuc0FDrW7Py/mIlQNQ==}
-    peerDependencies:
-      body: ^5.x.x
-      query-string: ^8.x.x
-      vite: ^5.x.x
     dependencies:
       body: 5.1.0
       query-string: 8.2.0
       vite: 5.1.6_@types+node@20.11.26
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - lightningcss
+      - sass
+      - stylus
+      - sugarss
+      - terser
     dev: true
 
-  /wtbx-vite-page-routes/1.0.2_liiuylxhdlyjn2srdvtzssnoqe:
-    resolution: {integrity: sha512-i0bXak9LxB/63slCZjC3ugVYmxzP/Job95D4xxuDazZRxW5/QKomSkirFTfzLSUh+PB3DcxA++9/9g3HNL50dw==}
-    peerDependencies:
-      react: ^18.x.x
-      react-dom: ^18.x.x
-      react-router-dom: ^6.x.x
-      vite: ^5.x.x
+  /wtbx-vite-react-page-routes/1.0.3_@types+node@20.11.26:
+    resolution: {integrity: sha512-zVKZD2i9y1phM1xZ2XguQk1nDvfvDX8ZX507c+RdXQInFlL2TzP/1OKNGaR+wQ0FahTIllpjBVOthr3LerpDZA==}
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-router-dom: 6.22.3_biqbaboplfbrettd7655fr4n2y
       vite: 5.1.6_@types+node@20.11.26
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - lightningcss
+      - sass
+      - stylus
+      - sugarss
+      - terser
     dev: true
 
   /yallist/3.1.1:
