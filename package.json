@@ -30,7 +30,7 @@
     "wtbx-create-value-storage": "^1.0.0",
     "wtbx-enum": "^1.0.0",
     "wtbx-fetch-plus": "^1.0.7",
-    "wtbx-type-safe-fetch": "^1.0.0"
+    "wtbx-type-safe-fetch": "^1.1.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",

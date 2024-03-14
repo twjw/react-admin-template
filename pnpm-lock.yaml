@@ -43,7 +43,7 @@ specifiers:
   wtbx-fetch-plus: ^1.0.7
   wtbx-merge-env: ^1.0.1
   wtbx-react-atom: ^1.0.0
-  wtbx-type-safe-fetch: ^1.0.0
+  wtbx-type-safe-fetch: ^1.1.0
   wtbx-types: ^1.0.3
   wtbx-uno-preset-rem: ^1.0.1
   wtbx-vite-auto-alias: ^1.0.1
@@ -68,7 +68,7 @@ dependencies:
   wtbx-create-value-storage: 1.0.0
   wtbx-enum: 1.0.0
   wtbx-fetch-plus: 1.0.7_btoigd27faj6byokxmdsv5iuam
-  wtbx-type-safe-fetch: 1.0.0_query-string@8.2.0
+  wtbx-type-safe-fetch: 1.1.0
 
 devDependencies:
   '@faker-js/faker': 8.4.1
@@ -4688,12 +4688,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: true
 
-  /wtbx-type-safe-fetch/1.0.0_query-string@8.2.0:
-    resolution: {integrity: sha512-TyAC6VTRW3xe/DRlaCewvEjWo2L4oKLOnoxax9PT86yi5+nyXwGMiNQBfYA9Qa7a23NHBrIIGdIbgiwRPlOCqA==}
-    peerDependencies:
-      query-string: '>=8'
-    dependencies:
-      query-string: 8.2.0
+  /wtbx-type-safe-fetch/1.1.0:
+    resolution: {integrity: sha512-PJzew83igrtcI3LwvRyha1yiMHKZiujZJPB303y3XTCmQXjqVWfNS3p5LyyU5S0OEFTzoJsklb02o6T4M4qppQ==}
     dev: false
 
   /wtbx-types/1.0.3:
