@@ -67,7 +67,7 @@
     "wtbx-vite-build-drop-log": "^1.0.0",
     "wtbx-vite-i18n": "^1.0.1",
     "wtbx-vite-inject-env": "^1.0.1",
-    "wtbx-vite-mock-apis": "^1.1.1",
+    "wtbx-vite-mock-apis": "^1.2.0",
     "wtbx-vite-react-page-routes": "^1.0.3"
   }
 }
