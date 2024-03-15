@@ -17,7 +17,7 @@ if (envConfig.vite.isLocal) fetch2.middleware(mock)
 // 將路徑的方法轉換成 method
 fetch2.middleware(methodUrl)
 
-// 將路徑的方法轉換成 method
+// 自動傳入 token 及 response 沒權限踢到登入頁面
 fetch2.middleware(auth)
 
 // 將 params 轉成 qs, body 轉成字串
