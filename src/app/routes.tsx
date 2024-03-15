@@ -1,29 +1,34 @@
-import { Navigate, Route, Routes as ReactRoutes } from 'react-router-dom'
+import { Navigate, Route, Routes as ReactRoutes, useNavigate } from 'react-router-dom'
 import { createPageRoutes } from '~page-routes'
 import { RouteWrap } from '@/components/route/wrap.tsx'
-import { lazy, ReactNode, Suspense, useMemo } from 'react'
-
-const LazyError404 = lazy(() => import('@/components/pages/404.tsx'))
+import { ReactNode, Suspense, useMemo } from 'react'
+import { LazyError404 } from '@/components/pages/404.tsx'
+import { hookInstances } from '@/constants/injection.ts'
 
 function ErrorPageSuspense({ children }: { children: ReactNode }) {
-	return <Suspense fallback={null}>{children}</Suspense>
+	return <Suspense>{children}</Suspense>
 }
 
 function Routes() {
-	return (
-		<ReactRoutes>
-			<Route path={'/'} element={<Navigate to={'/login'} replace />} />
-			{useMemo(() => createPageRoutes({ Wrap: RouteWrap }), [])}
-			<Route
-				path={'*'}
-				element={
-					<ErrorPageSuspense>
-						<LazyError404 />
-					</ErrorPageSuspense>
-				}
-			/>
-		</ReactRoutes>
-	)
+	return <ReactRoutes>{routes()}</ReactRoutes>
+}
+
+function routes() {
+	hookInstances.navigate = useNavigate()
+
+	return [
+		<Route key={'/'} path={'/'} element={<Navigate to={'/login'} replace />} />,
+		useMemo(() => createPageRoutes({ Wrap: RouteWrap }), []),
+		<Route
+			key={'*'}
+			path={'*'}
+			element={
+				<ErrorPageSuspense>
+					<LazyError404 />
+				</ErrorPageSuspense>
+			}
+		/>,
+	]
 }
 
 export { Routes }

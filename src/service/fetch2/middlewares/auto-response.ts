@@ -1,6 +1,6 @@
 import type { TsFetchWatchMap } from 'wtbx-type-safe-fetch'
 import { ApiResponse, MyListenerRequestInit } from '@/service/fetch2/type.ts'
-import { message } from 'antd'
+import { hookInstances } from '@/constants/injection.ts'
 
 const autoResponse: TsFetchWatchMap<
 	Error,
@@ -13,7 +13,7 @@ const autoResponse: TsFetchWatchMap<
 		const success = res.status === 200
 		const _message = result?.message
 
-		if (!success) message.error(_message || 'internal server error')
+		if (!success) hookInstances.message?.error(_message || 'internal server error')
 
 		return {
 			success,
@@ -24,7 +24,7 @@ const autoResponse: TsFetchWatchMap<
 	error(req, error) {
 		const _message = 'client logic error'
 
-		message.error(_message)
+		hookInstances.message?.error(_message)
 
 		return {
 			success: false,

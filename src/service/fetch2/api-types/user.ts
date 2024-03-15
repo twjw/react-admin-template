@@ -2,6 +2,9 @@ import { TsFetchTemplateDefineApis } from 'wtbx-type-safe-fetch'
 import { ApiResponse } from '@/service/fetch2/type.ts'
 
 export declare namespace Login {
+	export type Params = {
+		expiredMinutes?: number
+	}
 	export type Body = {
 		username: string
 		password: string
@@ -23,6 +26,7 @@ export type Apis = TsFetchTemplateDefineApis<{
 		response: ApiResponse<Profile.Response>
 	}
 	'mock:user:post:/api/user/login': {
+		params?: Login.Params
 		body: Login.Body
 		response: ApiResponse<Login.Response>
 	}

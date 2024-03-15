@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { fetch2 } from '@/service/fetch2'
 import { t } from '~i18n'
-import { Button, Form, Input, message } from 'antd'
+import { Button, Form, Input } from 'antd'
 import { envConfig } from '~env-config'
-import { $userProfile } from '@/service/store/atoms/user.ts'
 import { storage } from '@/service/store/storage.ts'
 import { useNavigate } from 'react-router-dom'
+import { getUserProfile } from '@/service/fetch2/helper/user.ts'
+import { hookInstances } from '@/constants/injection.ts'
 
 type FieldType = {
 	username: string
@@ -18,19 +19,21 @@ function Page() {
 
 	async function onLogin(values: FieldType) {
 		setLoading(true)
-		const loginRes = await fetch2('mock:user:post:/api/user/login', { body: values })
+		const loginRes = await fetch2('mock:user:post:/api/user/login', {
+			body: values,
+			params: { expiredMinutes: 30 },
+		})
 
 		if (loginRes.success) {
 			storage.token.setItem(loginRes.data!.token)
 
-			const profileRes = await fetch2('mock:user:get:/api/user/profile')
+			const userProfile = await getUserProfile()
 
-			if (profileRes.success) {
-				message.success(t('loginSucceedRedirect'))
+			if (userProfile != null) {
+				hookInstances.message?.success(t('loginSucceedRedirect'))
 
 				setTimeout(() => {
 					setLoading(false)
-					$userProfile(profileRes.data!)
 					navigate('/app/home')
 				}, 1500)
 			} else {
