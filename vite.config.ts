@@ -26,7 +26,7 @@ export default async ({ mode, command }: { mode: string; command: 'serve' | 'bui
 	const isBuild = command === 'build'
 	const envConfig = await mergeEnv<EnvType, EnvMode>({ mode, dirs: [process.cwd()] })
 	const clientEnv: ClintEnv = merge(envConfig, {
-		vite: { mock: !isBuild },
+		vite: { isLocal: !isBuild },
 	})
 
 	return defineConfig({

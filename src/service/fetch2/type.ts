@@ -2,7 +2,8 @@ import { TsFetchListenerRequestInit } from 'wtbx-type-safe-fetch'
 
 export type ApiResponse<T> = {
 	success: boolean
-	data: T
+	message: string
+	data?: T
 }
 
 export type MyRequestInitOther = {

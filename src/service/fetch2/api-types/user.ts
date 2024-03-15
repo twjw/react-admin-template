@@ -1,5 +1,5 @@
 import { TsFetchTemplateDefineApis } from 'wtbx-type-safe-fetch'
-import { ApiResponse } from '@/service/fetch2/api-types/common.ts'
+import { ApiResponse } from '@/service/fetch2/type.ts'
 
 export declare namespace Login {
 	export type Body = {
@@ -7,12 +7,22 @@ export declare namespace Login {
 		password: string
 	}
 	export type Response = {
-		token: number
+		token: string
+	}
+}
+
+export declare namespace Profile {
+	export type Response = {
+		id: number
+		name: string
 	}
 }
 
 export type Apis = TsFetchTemplateDefineApis<{
-	'post:/mock-api/api/user/login?mockFile=user': {
+	'mock:user:get:/api/user/profile': {
+		response: ApiResponse<Profile.Response>
+	}
+	'mock:user:post:/api/user/login': {
 		body: Login.Body
 		response: ApiResponse<Login.Response>
 	}
