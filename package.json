@@ -43,7 +43,7 @@
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
     "@unocss/core": "^0.58.6",
-    "@unocss/transformer-variant-group": "^0.58.2",
+    "@unocss/transformer-variant-group": "^0.58.5",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "body": "^5.1.0",
     "cac": "^6.7.14",
@@ -70,6 +70,6 @@
     "wtbx-vite-i18n": "^1.0.1",
     "wtbx-vite-inject-env": "^1.0.1",
     "wtbx-vite-mock-apis": "^1.2.0",
-    "wtbx-vite-react-page-routes": "^1.0.3"
+    "wtbx-vite-page-routes": "^1.0.2"
   }
 }

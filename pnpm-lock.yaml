@@ -12,7 +12,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^7.1.1
   '@typescript-eslint/parser': ^7.1.1
   '@unocss/core': ^0.58.6
-  '@unocss/transformer-variant-group': ^0.58.2
+  '@unocss/transformer-variant-group': ^0.58.5
   '@vitejs/plugin-react-swc': ^3.5.0
   antd: ^5.15.2
   body: ^5.1.0
@@ -53,7 +53,7 @@ specifiers:
   wtbx-vite-i18n: ^1.0.1
   wtbx-vite-inject-env: ^1.0.1
   wtbx-vite-mock-apis: ^1.2.0
-  wtbx-vite-react-page-routes: ^1.0.3
+  wtbx-vite-page-routes: ^1.0.2
 
 dependencies:
   antd: 5.15.2_biqbaboplfbrettd7655fr4n2y
@@ -110,7 +110,7 @@ devDependencies:
   wtbx-vite-i18n: 1.0.1_vite@5.1.6
   wtbx-vite-inject-env: 1.0.1_vite@5.1.6
   wtbx-vite-mock-apis: 1.2.0_uj5bb2u63f4ial3woygha6q46a
-  wtbx-vite-react-page-routes: 1.0.3_liiuylxhdlyjn2srdvtzssnoqe
+  wtbx-vite-page-routes: 1.0.2_liiuylxhdlyjn2srdvtzssnoqe
 
 packages:
 
@@ -4705,8 +4705,8 @@ packages:
       vite: 5.1.6_@types+node@20.11.26
     dev: true
 
-  /wtbx-vite-react-page-routes/1.0.3_liiuylxhdlyjn2srdvtzssnoqe:
-    resolution: {integrity: sha512-zVKZD2i9y1phM1xZ2XguQk1nDvfvDX8ZX507c+RdXQInFlL2TzP/1OKNGaR+wQ0FahTIllpjBVOthr3LerpDZA==}
+  /wtbx-vite-page-routes/1.0.2_liiuylxhdlyjn2srdvtzssnoqe:
+    resolution: {integrity: sha512-i0bXak9LxB/63slCZjC3ugVYmxzP/Job95D4xxuDazZRxW5/QKomSkirFTfzLSUh+PB3DcxA++9/9g3HNL50dw==}
     peerDependencies:
       react: ^18.x.x
       react-dom: ^18.x.x
