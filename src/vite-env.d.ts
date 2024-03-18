@@ -20,7 +20,7 @@ declare module '~i18n' {
 	import type { RecursiveKeyOf } from 'wtbx-types'
 
 	export type Dictionary = typeof import('@/assets/locales/zh_TW.ts').default
-	export type Locale = 'zh_TW'
+	export type Locale = 'zh_TW' | 'en'
 	export type KeyofDictionary = RecursiveKeyOf<Dictionary>
 	export const dictionary: Dictionary
 	export const locale: Locale

@@ -6,8 +6,8 @@ import { hookInstances } from '@/constants/injection.ts'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
-const defaultSelectedKeys = ['/home']
-const defaultOpenKeys = ['/home']
+const defaultSelectedKeys = [location.pathname]
+const defaultOpenKeys = [location.pathname]
 
 function baseItemProps(key: string) {
 	return {
