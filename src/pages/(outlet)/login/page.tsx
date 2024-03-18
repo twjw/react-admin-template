@@ -34,7 +34,7 @@ function Page() {
 
 				setTimeout(() => {
 					setLoading(false)
-					navigate('/app/home')
+					navigate('/home')
 				}, 1500)
 			} else {
 				setLoading(false)

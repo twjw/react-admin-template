@@ -39,6 +39,10 @@ export default defineConfig({
 			xl: `${Breakpoint.xl}px`,
 			xxl: `${Breakpoint.xxl}px`,
 		},
+		colors: {
+			'ant-dark-menu': 'var(--ant-menu-dark-item-bg)',
+			'gray-border': 'rgba(5, 5, 5, 0.06)',
+		},
 	},
 	shortcuts: [
 		['flex-center', 'flex justify-center items-center'],

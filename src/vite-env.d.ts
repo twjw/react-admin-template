@@ -12,6 +12,7 @@ declare module '~page-routes' {
 	export const createPageRoutes: PageRoutes.CreatePageRoutes
 	export const usePageRoute: PageRoutes.UsePageRute<PageMeta>
 	export const matchPageRoute: PageRoutes.MatchPageRoute<PageMeta>
+	export const relativeRoutePathMap: PageRoutes.RelativeRoutePathMap
 }
 
 declare module '~i18n' {

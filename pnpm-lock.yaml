@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@ant-design/colors': ^7.0.2
+  '@ant-design/icons': ^5.3.4
   '@faker-js/faker': ^8.3.1
   '@remix-run/router': ^1.14.1
   '@types/clone-deep': ^4.0.4
@@ -53,9 +54,10 @@ specifiers:
   wtbx-vite-i18n: ^1.0.1
   wtbx-vite-inject-env: ^1.0.1
   wtbx-vite-mock-apis: ^1.2.0
-  wtbx-vite-react-page-routes: ^1.0.4
+  wtbx-vite-react-page-routes: ^1.1.1
 
 dependencies:
+  '@ant-design/icons': 5.3.4_biqbaboplfbrettd7655fr4n2y
   antd: 5.15.2_biqbaboplfbrettd7655fr4n2y
   clsx: 2.1.0
   dayjs: 1.11.10
@@ -110,7 +112,7 @@ devDependencies:
   wtbx-vite-i18n: 1.0.1_vite@5.1.6
   wtbx-vite-inject-env: 1.0.1_vite@5.1.6
   wtbx-vite-mock-apis: 1.2.0_uj5bb2u63f4ial3woygha6q46a
-  wtbx-vite-react-page-routes: 1.0.4_liiuylxhdlyjn2srdvtzssnoqe
+  wtbx-vite-react-page-routes: 1.1.1_liiuylxhdlyjn2srdvtzssnoqe
 
 packages:
 
@@ -153,8 +155,8 @@ packages:
     resolution: {integrity: sha512-vHbT+zJEVzllwP+CM+ul7reTEfBR0vgxFe7+lREAsAA7YGsYpboiq2sQNeQeRvh09GfQgs/GyFEvZpJ9cLXpXA==}
     dev: false
 
-  /@ant-design/icons/5.3.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-85zROTJCCApQn0Ee6L9561+Vd7yVKtSWNm2TpmOsYMrumchbzaRK83x1WWHv2VG+Y1ZAaKkDwcnnSPS/eSwNHA==}
+  /@ant-design/icons/5.3.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-U5eTSeSFr2V9SeJzYOo5mybAZfsoNuiIA8bvFoZUe+h9LBLs8UwrVaVwcMQC4AhBuojXkLMlmtnIlvUczXXHaQ==}
     engines: {node: '>=8'}
     peerDependencies:
       react: '>=16.0.0'
@@ -1846,7 +1848,7 @@ packages:
     dependencies:
       '@ant-design/colors': 7.0.2
       '@ant-design/cssinjs': 1.18.4_biqbaboplfbrettd7655fr4n2y
-      '@ant-design/icons': 5.3.1_biqbaboplfbrettd7655fr4n2y
+      '@ant-design/icons': 5.3.4_biqbaboplfbrettd7655fr4n2y
       '@ant-design/react-slick': 1.0.2_react@18.2.0
       '@babel/runtime': 7.24.0
       '@ctrl/tinycolor': 3.6.1
@@ -4705,8 +4707,8 @@ packages:
       vite: 5.1.6_@types+node@20.11.26
     dev: true
 
-  /wtbx-vite-react-page-routes/1.0.4_liiuylxhdlyjn2srdvtzssnoqe:
-    resolution: {integrity: sha512-j2NXAXL+WOVF+Uk4bwzychP8zz2fuCRYtCTwV3tZW4YXely7RF90Mh191emOIlNU0fhtGoT1jCd5mwEpaB3ZZQ==}
+  /wtbx-vite-react-page-routes/1.1.1_liiuylxhdlyjn2srdvtzssnoqe:
+    resolution: {integrity: sha512-bIIbknxjV7rPiyZUD6LSr/eNXWtnj+NyrNfK1EVpCbyx9H1dakj0BzWwIh++BuLhuZVQafVE5nVDLdPX9dhGVg==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'

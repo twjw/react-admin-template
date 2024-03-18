@@ -18,6 +18,7 @@ const auth: TsFetchWatchMap<Error, MyListenerRequestInit, Response, Response> = 
 	},
 	response(req, res) {
 		if (res.status === 403) {
+			storage.token.setItem(null)
 			hookInstances.navigate?.('/', { replace: true })
 		}
 
