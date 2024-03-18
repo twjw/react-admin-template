@@ -53,7 +53,7 @@ specifiers:
   wtbx-vite-i18n: ^1.0.1
   wtbx-vite-inject-env: ^1.0.1
   wtbx-vite-mock-apis: ^1.2.0
-  wtbx-vite-page-routes: ^1.0.2
+  wtbx-vite-react-page-routes: ^1.0.4
 
 dependencies:
   antd: 5.15.2_biqbaboplfbrettd7655fr4n2y
@@ -110,7 +110,7 @@ devDependencies:
   wtbx-vite-i18n: 1.0.1_vite@5.1.6
   wtbx-vite-inject-env: 1.0.1_vite@5.1.6
   wtbx-vite-mock-apis: 1.2.0_uj5bb2u63f4ial3woygha6q46a
-  wtbx-vite-page-routes: 1.0.2_liiuylxhdlyjn2srdvtzssnoqe
+  wtbx-vite-react-page-routes: 1.0.4_liiuylxhdlyjn2srdvtzssnoqe
 
 packages:
 
@@ -4705,13 +4705,13 @@ packages:
       vite: 5.1.6_@types+node@20.11.26
     dev: true
 
-  /wtbx-vite-page-routes/1.0.2_liiuylxhdlyjn2srdvtzssnoqe:
-    resolution: {integrity: sha512-i0bXak9LxB/63slCZjC3ugVYmxzP/Job95D4xxuDazZRxW5/QKomSkirFTfzLSUh+PB3DcxA++9/9g3HNL50dw==}
+  /wtbx-vite-react-page-routes/1.0.4_liiuylxhdlyjn2srdvtzssnoqe:
+    resolution: {integrity: sha512-j2NXAXL+WOVF+Uk4bwzychP8zz2fuCRYtCTwV3tZW4YXely7RF90Mh191emOIlNU0fhtGoT1jCd5mwEpaB3ZZQ==}
     peerDependencies:
-      react: ^18.x.x
-      react-dom: ^18.x.x
-      react-router-dom: ^6.x.x
-      vite: ^5.x.x
+      react: '>=18'
+      react-dom: '>=18'
+      react-router-dom: '>=6'
+      vite: '>=4'
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
