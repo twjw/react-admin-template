@@ -1,13 +1,11 @@
 import { ReactNode, useMemo } from 'react'
 import { Header } from '@/components/layout/header.tsx'
 import { Sidebar } from '@/components/layout/sidebar.tsx'
-import { matchPageRoute } from '~page-routes'
-import { useLocation } from 'react-router-dom'
+import { usePageRoute } from '~page-routes'
 
 function Layout({ children }: { children: ReactNode }) {
-	const location = useLocation()
-	const ctx = useMemo(() => matchPageRoute(location.pathname), [location.pathname])
-	const isShowLayout = ctx?.meta?.layout ?? true
+	const ctx = usePageRoute()
+	const isShowLayout = ctx?.meta?.layout
 
 	return useMemo(
 		() =>

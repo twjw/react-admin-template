@@ -1,4 +1,4 @@
-import { PageMeta } from '@/types/common.ts'
+import { PageMeta } from '@page-meta-type'
 
 const meta: PageMeta = {
 	private: false,

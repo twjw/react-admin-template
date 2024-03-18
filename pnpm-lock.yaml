@@ -54,7 +54,7 @@ specifiers:
   wtbx-vite-i18n: ^1.0.1
   wtbx-vite-inject-env: ^1.0.1
   wtbx-vite-mock-apis: ^1.2.0
-  wtbx-vite-react-page-routes: ^1.1.1
+  wtbx-vite-react-page-routes: ^2.0.3
 
 dependencies:
   '@ant-design/icons': 5.3.4_biqbaboplfbrettd7655fr4n2y
@@ -112,7 +112,7 @@ devDependencies:
   wtbx-vite-i18n: 1.0.1_vite@5.1.6
   wtbx-vite-inject-env: 1.0.1_vite@5.1.6
   wtbx-vite-mock-apis: 1.2.0_uj5bb2u63f4ial3woygha6q46a
-  wtbx-vite-react-page-routes: 1.1.1_liiuylxhdlyjn2srdvtzssnoqe
+  wtbx-vite-react-page-routes: 2.0.3_liiuylxhdlyjn2srdvtzssnoqe
 
 packages:
 
@@ -4707,8 +4707,8 @@ packages:
       vite: 5.1.6_@types+node@20.11.26
     dev: true
 
-  /wtbx-vite-react-page-routes/1.1.1_liiuylxhdlyjn2srdvtzssnoqe:
-    resolution: {integrity: sha512-bIIbknxjV7rPiyZUD6LSr/eNXWtnj+NyrNfK1EVpCbyx9H1dakj0BzWwIh++BuLhuZVQafVE5nVDLdPX9dhGVg==}
+  /wtbx-vite-react-page-routes/2.0.3_liiuylxhdlyjn2srdvtzssnoqe:
+    resolution: {integrity: sha512-lnMWSlDG9uDGpe2GU6w9KjZiU6UU4ZeGJfTVQN6xbJICzH/1dR7MQ9szv+gAqAwlnOWI/oZV/Fs3oDyfZA+k2w==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'

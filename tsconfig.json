@@ -23,6 +23,9 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "@page-meta-type": [
+        "page-meta-type.ts"
       ]
     }
   },

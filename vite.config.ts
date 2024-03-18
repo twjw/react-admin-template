@@ -15,6 +15,7 @@ import checker from 'vite-plugin-checker'
 import { BASE_FONT_SIZE } from './.config-constants'
 import { merge } from 'lodash-es'
 import { ClintEnv, EnvMode, EnvType } from './.env'
+import { PageMeta } from './page-meta-type'
 
 const apiPrefix = {
 	dev: 'http://dev.com',
@@ -48,8 +49,12 @@ export default async ({ mode, command }: { mode: string; command: 'serve' | 'bui
 			injectEnv({ env: clientEnv, propNames: ['mode', 'title', 'vite'] }),
 			autoAlias(),
 			buildDropLog(),
-			pageRoutes({
+			pageRoutes<PageMeta>({
 				pages: [path.resolve(process.cwd(), 'src/pages')],
+				defaultMeta: {
+					private: true,
+					layout: true,
+				},
 			}),
 			i18n({
 				dirs: [path.resolve(process.cwd(), 'src/assets/locales')],

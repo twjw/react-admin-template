@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes as ReactRoutes, useNavigate } from 'react-router-dom'
 import { createPageRoutes } from '~page-routes'
-import { RouteWrap } from '@/components/route/wrap.tsx'
+import { RouteGuard } from '@/components/route/guard.tsx'
 import { ReactNode, Suspense, useMemo } from 'react'
 import { LazyError404 } from '@/components/pages/404.tsx'
 import { hookInstances } from '@/constants/injection.ts'
@@ -18,7 +18,7 @@ function routes() {
 
 	return [
 		<Route key={'/'} path={'/'} element={<Navigate to={'/login'} replace />} />,
-		useMemo(() => createPageRoutes({ Wrap: RouteWrap }), []),
+		useMemo(() => createPageRoutes({ guard: RouteGuard }), []),
 		<Route
 			key={'*'}
 			path={'*'}

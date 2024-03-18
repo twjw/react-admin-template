@@ -1,10 +1,9 @@
 import { ErrorBoundary } from '@/components/error-boundary.tsx'
-import { ReactNode, Suspense, useEffect, useMemo } from 'react'
-import { matchPageRoute } from '~page-routes'
+import { ReactNode, Suspense, useEffect } from 'react'
+import { usePageRoute } from '~page-routes'
 import { $userProfile } from '@/service/store/atoms/user.ts'
 import { getUserProfile } from '@/service/fetch2/helper/user.ts'
 import { LazyError404 } from '@/components/pages/404.tsx'
-import { useLocation } from 'react-router-dom'
 import { storage } from '@/service/store/storage.ts'
 
 type CommonProps = {
@@ -13,10 +12,10 @@ type CommonProps = {
 }
 
 function RouteContent({ path, children }: CommonProps) {
-	const location = useLocation()
-	const ctx = useMemo(() => matchPageRoute(location.pathname), [location.pathname])
-	const metaPrivate = ctx?.meta?.private ?? true
+	const ctx = usePageRoute()
+	const metaPrivate = ctx?.meta?.private
 	const userProfile = $userProfile.use
+	const hasPermission = metaPrivate ? userProfile != null : true
 
 	useEffect(updateProfile, [userProfile, metaPrivate])
 
@@ -24,10 +23,10 @@ function RouteContent({ path, children }: CommonProps) {
 		if (metaPrivate && userProfile == null && storage.token.getItem() != null) getUserProfile()
 	}
 
-	return <Suspense>{metaPrivate && userProfile == null ? <LazyError404 /> : children}</Suspense>
+	return <Suspense>{hasPermission ? children : <LazyError404 />}</Suspense>
 }
 
-function RouteWrap({ path, children }: CommonProps) {
+function RouteGuard({ path, children }: CommonProps) {
 	return (
 		<ErrorBoundary.Route>
 			<RouteContent path={path}>{children}</RouteContent>
@@ -35,4 +34,4 @@ function RouteWrap({ path, children }: CommonProps) {
 	)
 }
 
-export { RouteWrap }
+export { RouteGuard }
