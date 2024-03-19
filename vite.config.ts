@@ -18,9 +18,11 @@ import { ClintEnv, EnvMode, EnvType } from './.env'
 import { PageMeta } from './page-meta-type'
 
 const apiPrefix = {
+	// 開發
 	dev: 'http://dev.com',
+	// 測試
 	test: 'http://test.com',
-}
+}['dev']
 
 // https://vitejs.dev/config/
 export default async ({ mode, command }: { mode: string; command: 'serve' | 'build' }) => {
@@ -73,7 +75,7 @@ export default async ({ mode, command }: { mode: string; command: 'serve' | 'bui
 				...['/api'].reduce<Record<string, ProxyOptions>>(
 					(prev, prefix) => (
 						(prev[prefix] = {
-							target: apiPrefix.test,
+							target: apiPrefix,
 							changeOrigin: true,
 						}),
 						prev
