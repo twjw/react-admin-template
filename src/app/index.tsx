@@ -6,6 +6,7 @@ import { ReactNode, useEffect } from 'react'
 import { hookInstances } from '@/constants/injection.ts'
 import { $antdLocale, $dayjsLocale } from '@/service/store/atoms/app.ts'
 import { storage } from '@/service/store/storage.ts'
+import '@/enums/role.ts'
 
 function App() {
 	return (
@@ -27,7 +28,7 @@ function AntdProvider({ children }: { children: ReactNode }) {
 	function lazyAntLocale() {
 		if (dict[locale] != null) return
 
-		// TODO 之後在用插件優話
+		// TODO 之後在用插件優化
 		switch (locale) {
 			case 'zh_TW':
 				Promise.all([
