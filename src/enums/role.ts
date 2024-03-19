@@ -42,27 +42,33 @@ type UppercaseFirst<S extends string> = S extends `${infer A}${infer B}`
 
 type EnumInstance<T extends Record<string, Record<string, Eval>>, LK extends string> = {
 	[K in keyof T]: T[K]
+} & // 	{
+// 	[RLK in keyof T]: {
+// 		[K in keyof T[RLK] as `getBy${UppercaseFirst<K & string>}`]: {
+// 			<
+// 				PV extends K extends keyof T[keyof T] ? T[keyof T][K] : never,
+// 				PK extends keyof T[RLK] | LK,
+// 			>(
+// 				val: PV,
+// 				key: PK,
+// 			): PK extends LK ? RLK : T[RLK][PK]
+// 		}
+// 	}
+// }[keyof T]
+{
+	[K in keyof T[AnyKey<T>] as `getBy${UppercaseFirst<K & string>}`]: <
+		PV extends T[keyof T][K],
+		PK extends keyof T[AnyKey<T>] | LK,
+	>(
+		val: PV,
+		key: PK,
+	) => 1
 } & {
-	[RLK in keyof T]: {
-		[K in keyof T[RLK] as `getBy${UppercaseFirst<K & string>}`]: {
-			<
-				PV extends K extends keyof T[keyof T] ? T[keyof T][K] : never,
-				PK extends keyof T[RLK] | LK,
-			>(
-				val: PV,
-				key: PK,
-			): PK extends LK ? RLK : T[RLK][PK]
-		}
-	}
-}[keyof T] & {
-		[K in '0' as `getBy${UppercaseFirst<LK>}`]: <
-			PV extends keyof T,
-			PK extends keyof T[PV] | LK,
-		>(
-			val: PV,
-			key: PK,
-		) => PK extends LK ? PV : T[PV][PK]
-	} & { map: <R = void>(callback: <PL extends keyof T>(label: PL, value: T[PL]) => R) => void }
+	[K in '0' as `getBy${UppercaseFirst<LK>}`]: <PV extends keyof T, PK extends keyof T[PV] | LK>(
+		val: PV,
+		key: PK,
+	) => PK extends LK ? PV : T[PV][PK]
+} & { map: <R = void>(callback: <PL extends keyof T>(label: PL, value: T[PL]) => R) => void }
 
 function createEnum<
 	T extends Record<string, Record<string, Eval>>,
@@ -106,8 +112,80 @@ const a = createEnum(
 
 const e1 = a.getByLabel('USER', 'label')
 const e2 = a.getByValue('1', 'label')
+const e22 = a.getByValue('1', 'level')
 const e3 = a.getByLevel(200, 'value')
 
 a.map((k, v) => {
 	return 1
 })
+
+type ZZZ<T> = T extends Record<string, infer V> ? V : never
+
+type AAA<T, V> =
+	T extends Record<string, any>
+		? ZZZ<{
+				[K in keyof T as T[K]['value'] extends V ? K : never]: T[K]['level']
+			}>
+		: never
+
+type b = AAA<
+	{
+		SUPER: {
+			value: '1'
+			level: 100
+		}
+		USER: {
+			value: '2'
+			level: 200
+		}
+	},
+	'2'
+>
+
+const bbb = '' as unknown as b
+
+type AnyKey<T extends Record<string, any>> =
+	T extends Record<infer K, any>
+		? TuplifyUnion<keyof T> extends [infer K1, ...infer K2]
+			? K1
+			: never
+		: never
+
+type AAA2<T extends Record<string, any>> = {
+	[K in keyof T[AnyKey<T>]]: T[AnyKey<T>][K]
+}
+
+type c = AAA2<{
+	SUPER: {
+		value: '1'
+		level: 100
+	}
+	USER: {
+		value: '2'
+		level: 200
+	}
+}>
+
+const ccc = '' as unknown as c
+
+// oh boy don't do this
+type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
+	k: infer I,
+) => void
+	? I
+	: never
+type LastOf<T> =
+	UnionToIntersection<T extends any ? () => T : never> extends () => infer R ? R : never
+
+// TS4.0+
+type Push<T extends any[], V> = [...T, V]
+
+// TS4.1+
+type TuplifyUnion<T, L = LastOf<T>, N = [T] extends [never] ? true : false> = true extends N
+	? []
+	: Push<TuplifyUnion<Exclude<T, L>>, L>
+
+type abc = 'a' | 'b' | 'c'
+type t = TuplifyUnion<abc> // ["a", "b", "c"]
+
+const asdas = undefined as unknown as t
