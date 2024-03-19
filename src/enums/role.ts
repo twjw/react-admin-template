@@ -54,7 +54,15 @@ type EnumInstance<T extends Record<string, Record<string, Eval>>, LK extends str
 			): PK extends LK ? RLK : T[RLK][PK]
 		}
 	}
-}[keyof T] & { [K in '0' as `getBy${UppercaseFirst<LK>}`]: () => void } & { map: () => void }
+}[keyof T] & {
+		[K in '0' as `getBy${UppercaseFirst<LK>}`]: <
+			PV extends keyof T,
+			PK extends keyof T[PV] | LK,
+		>(
+			val: PV,
+			key: PK,
+		) => PK extends LK ? PV : T[PV][PK]
+	} & { map: <R = void>(callback: <PL extends keyof T>(label: PL, value: T[PL]) => R) => void }
 
 function createEnum<
 	T extends Record<string, Record<string, Eval>>,
@@ -96,6 +104,10 @@ const a = createEnum(
 		}) as const,
 )
 
-const e1 = a.getByLabel('USER', 'value')
+const e1 = a.getByLabel('USER', 'label')
 const e2 = a.getByValue('1', 'label')
 const e3 = a.getByLevel(200, 'value')
+
+a.map((k, v) => {
+	return 1
+})
