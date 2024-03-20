@@ -52,7 +52,7 @@ specifiers:
   wtbx-uno-preset-rem-121: ^1.0.0
   wtbx-vite-auto-alias: ^1.0.1
   wtbx-vite-build-drop-log: ^1.0.0
-  wtbx-vite-i18n: ^1.0.1
+  wtbx-vite-i18n: ^1.1.1
   wtbx-vite-inject-env: ^1.0.1
   wtbx-vite-mock-apis: ^1.2.0
   wtbx-vite-react-page-routes: ^2.0.3
@@ -111,7 +111,7 @@ devDependencies:
   wtbx-uno-preset-rem-121: 1.0.0_@unocss+core@0.58.6
   wtbx-vite-auto-alias: 1.0.1_vite@5.1.6
   wtbx-vite-build-drop-log: 1.0.0_vite@5.1.6
-  wtbx-vite-i18n: 1.0.1_vite@5.1.6
+  wtbx-vite-i18n: 1.1.1_vite@5.1.6
   wtbx-vite-inject-env: 1.0.1_vite@5.1.6
   wtbx-vite-mock-apis: 1.2.0_uj5bb2u63f4ial3woygha6q46a
   wtbx-vite-react-page-routes: 2.0.3_liiuylxhdlyjn2srdvtzssnoqe
@@ -4672,8 +4672,8 @@ packages:
       vite: 5.1.6_@types+node@20.11.26
     dev: true
 
-  /wtbx-vite-i18n/1.0.1_vite@5.1.6:
-    resolution: {integrity: sha512-avWs1hIDBTjmEDUI1xsUfJYaFQh8NWXLkek8z82f/g1XFT7GfU90cZES54NdHSxYyUiJ2JR0j18AZxwCTecnQw==}
+  /wtbx-vite-i18n/1.1.1_vite@5.1.6:
+    resolution: {integrity: sha512-7gaG2Rn5NUDq/il0uvf8rpueoH816UeS9Pch/F7k68ojd4+qFOyAIFyDdKjDTbqYEEuc66fB3xf1+/Z47F6o0g==}
     peerDependencies:
       vite: ^5.x.x
     dependencies:

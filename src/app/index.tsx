@@ -2,10 +2,11 @@ import { BrowserRouter } from 'react-router-dom'
 import { App as I18nApp, locale } from '~i18n'
 import { Routes } from '@/app/routes.tsx'
 import { App as AntdApp, ConfigProvider } from 'antd'
-import { ReactNode, useEffect } from 'react'
-import { hookInstances } from '@/constants/injection.ts'
-import { $antdLocale, $dayjsLocale } from '@/service/store/atoms/app.ts'
+import { ReactNode, useEffect, useState } from 'react'
+import { antdLocale, hookInstances } from '@/constants/injection.ts'
 import { storage } from '@/service/store/storage.ts'
+import { Locale } from 'antd/es/locale'
+import { updateLocale } from '@/utils/locale.ts'
 
 function App() {
 	return (
@@ -20,42 +21,20 @@ function App() {
 }
 
 function AntdProvider({ children }: { children: ReactNode }) {
-	const dict = $antdLocale.use
+	const [configLocale, setConfigLocale] = useState<Locale | null>(null)
 
-	useEffect(lazyAntLocale, [])
+	useEffect(initLocale, [])
 
-	function lazyAntLocale() {
-		if (dict[locale] != null) return
-
-		// TODO 之後在用插件優化
-		switch (locale) {
-			case 'zh_TW':
-				Promise.all([
-					import('dayjs/locale/zh-tw'),
-					import('antd/es/date-picker/locale/zh_TW').then(res =>
-						$dayjsLocale({ ...$dayjsLocale.value, zh_TW: res.default }),
-					),
-					import(`antd/locale/zh_TW`).then(res =>
-						$antdLocale({ ...$antdLocale.value, zh_TW: res.default }),
-					),
-				])
-				break
-			case 'en':
-				Promise.all([
-					import('dayjs/locale/en'),
-					import('antd/es/date-picker/locale/en_US').then(res =>
-						$dayjsLocale({ ...$dayjsLocale.value, en: res.default }),
-					),
-					import(`antd/locale/en_US`).then(res =>
-						$antdLocale({ ...$antdLocale.value, en: res.default }),
-					),
-				])
-				break
-		}
+	function initLocale() {
+		updateLocale(locale).then(() => {
+			setConfigLocale(antdLocale.configProvider[locale])
+		})
 	}
 
+	if (configLocale == null) return null
+
 	return (
-		<ConfigProvider theme={{ cssVar: true }} locale={dict[locale] || dict['zh_TW']}>
+		<ConfigProvider theme={{ cssVar: true }} locale={antdLocale.configProvider[locale]}>
 			<AntdApp>
 				<AntdChildren>{children}</AntdChildren>
 			</AntdApp>
