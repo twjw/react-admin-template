@@ -42,7 +42,7 @@ specifiers:
   vite-plugin-html: ^3.2.1
   vite-plugin-svgr: ^4.2.0
   wtbx-create-value-storage: ^1.0.0
-  wtbx-enum: ^1.0.0
+  wtbx-enum: ^2.0.0
   wtbx-fetch-plus: ^1.0.7
   wtbx-merge-env: ^1.0.1
   wtbx-react-atom: ^1.0.0
@@ -71,7 +71,6 @@ dependencies:
   react-error-boundary: 4.0.13_react@18.2.0
   react-router-dom: 6.22.3_biqbaboplfbrettd7655fr4n2y
   wtbx-create-value-storage: 1.0.0
-  wtbx-enum: 1.0.0
   wtbx-fetch-plus: 1.0.7_btoigd27faj6byokxmdsv5iuam
 
 devDependencies:
@@ -103,6 +102,7 @@ devDependencies:
   vite-plugin-checker: 0.6.4_ijazftkzg6d7emd2jpcld7a6sa
   vite-plugin-html: 3.2.2_vite@5.1.6
   vite-plugin-svgr: 4.2.0_ebtatjq6ttctxp6n66bixf3nue
+  wtbx-enum: 2.0.0
   wtbx-merge-env: 1.0.1_lodash-es@4.17.21
   wtbx-react-atom: 1.0.0_react@18.2.0
   wtbx-type-safe-fetch: 1.2.0
@@ -4597,9 +4597,9 @@ packages:
     resolution: {integrity: sha512-pjxvxY/Ytsvj/ep8L2ZzCWvN3s7Vudmwg7OQprHXBbypnXpBNxmj0LPpySliOuwRsMdnzjLO0txai5u9yOJEkA==}
     dev: false
 
-  /wtbx-enum/1.0.0:
-    resolution: {integrity: sha512-Ggx4CfsXHw6eNfgduzWVF2bOcAxVlzkmhAc9ItCDsGBTCffikK0SqJGWUeovWH9pv8Z+ai+XAL5gTaDdd+ub1g==}
-    dev: false
+  /wtbx-enum/2.0.0:
+    resolution: {integrity: sha512-rQnB8tMygBWurQbK/4/xTOs9ESdGCLk6GgLxfIgrGAN0JKrQv1zb+bLC6BZgKLDhWI9OGwOgCZQkzTYtjLoQZw==}
+    dev: true
 
   /wtbx-fetch-plus/1.0.7_btoigd27faj6byokxmdsv5iuam:
     resolution: {integrity: sha512-f+PaNTGtWbxUzhXNN7XW0Qy/AaAYHbfCF/oVfLQgICyBBTxg20BcGTZGuDGJZUXRzSSob+gt7tZd4waYM38wKw==}
