@@ -67,6 +67,7 @@
     "wtbx-types": "^1.0.3",
     "wtbx-uno-preset-antd-colors-theme": "^1.0.2",
     "wtbx-uno-preset-rem-121": "^1.0.0",
+    "wtbx-vite-antd-locale-import": "^1.0.2",
     "wtbx-vite-auto-alias": "^1.0.1",
     "wtbx-vite-build-drop-log": "^1.0.0",
     "wtbx-vite-i18n": "^1.1.1",

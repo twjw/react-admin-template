@@ -16,6 +16,8 @@ import { BASE_FONT_SIZE } from './.config-constants'
 import { merge } from 'lodash-es'
 import { ClintEnv, EnvMode, EnvType } from './.env'
 import { PageMeta } from './page-meta-type'
+import { antdLocaleImport } from 'wtbx-vite-antd-locale-import'
+import { Locale } from './src/types/common'
 
 const apiPrefix = {
 	// 開發
@@ -25,7 +27,7 @@ const apiPrefix = {
 }['dev']
 
 // https://vitejs.dev/config/
-export default async ({ mode, command }: { mode: string; command: 'serve' | 'build' }) => {
+export default async ({ mode, command }: { mode: EnvMode; command: 'serve' | 'build' }) => {
 	const isBuild = command === 'build'
 	const envConfig = await mergeEnv<EnvType, EnvMode>({ mode, dirs: [process.cwd()] })
 	const clientEnv: ClintEnv = merge(envConfig, {
@@ -65,6 +67,18 @@ export default async ({ mode, command }: { mode: string; command: 'serve' | 'bui
 			checker({
 				typescript: {
 					buildMode: isBuild,
+				},
+			}),
+			antdLocaleImport<Locale>({
+				locales: {
+					zh_TW: {
+						dayjs: 'zh-tw',
+						antd: 'zh_TW',
+					},
+					en: {
+						dayjs: 'en',
+						antd: 'en_US',
+					},
 				},
 			}),
 		],

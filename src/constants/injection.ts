@@ -15,5 +15,5 @@ export const hookInstances = {
 
 export const antdLocale = {
 	configProvider: {} as Record<Locale, AntdLocale>,
-	dayjs: {} as Record<Locale, PickerLocale>,
+	datePicker: {} as Record<Locale, PickerLocale>,
 }
