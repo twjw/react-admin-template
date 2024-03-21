@@ -63,12 +63,6 @@ export default async ({ mode, command }: { mode: EnvMode; command: 'serve' | 'bu
 			i18n({
 				dirs: [path.resolve(process.cwd(), 'src/assets/locales')],
 			}),
-			UnoCSS(),
-			checker({
-				typescript: {
-					buildMode: isBuild,
-				},
-			}),
 			antdLocaleImport<Locale>({
 				locales: {
 					zh_TW: {
@@ -79,6 +73,12 @@ export default async ({ mode, command }: { mode: EnvMode; command: 'serve' | 'bu
 						dayjs: 'en',
 						antd: 'en_US',
 					},
+				},
+			}),
+			UnoCSS(),
+			checker({
+				typescript: {
+					buildMode: isBuild,
 				},
 			}),
 		],

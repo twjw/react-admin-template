@@ -1,7 +1,7 @@
 import type { TsFetchWatchMap } from 'wtbx-type-safe-fetch'
 import { MyListenerRequestInit } from '@/service/fetch2/type.ts'
 import { storage } from '@/service/store/storage.ts'
-import { hookInstances } from '@/constants/injection.ts'
+import { hookInstances } from '@/constants'
 
 const auth: TsFetchWatchMap<Error, MyListenerRequestInit, Response, Response> = {
 	request(req) {

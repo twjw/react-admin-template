@@ -6,7 +6,7 @@ import { envConfig } from '~env-config'
 import { storage } from '@/service/store/storage.ts'
 import { useNavigate } from 'react-router-dom'
 import { getUserProfile } from '@/service/fetch2/helper/user.ts'
-import { hookInstances } from '@/constants/injection.ts'
+import { hookInstances } from '@/constants'
 
 type FieldType = {
 	username: string

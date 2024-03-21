@@ -5,7 +5,7 @@ import type {
 	PickerPropsWithMultiple,
 } from 'antd/es/date-picker/generatePicker/interface'
 import type { Dayjs } from 'dayjs'
-import { antdLocale } from '@/constants/injection.ts'
+import { antdLocale } from '@/constants'
 
 type LocalePickerBaseProps = PickerPropsWithMultiple<Dayjs, PickerProps<Dayjs>, Dayjs>
 

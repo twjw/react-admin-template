@@ -2,7 +2,7 @@ import { $sidebarCollapsed } from '@/components/layout/atoms.ts'
 import type { MenuProps } from 'antd'
 import { Menu } from 'antd'
 import { HomeOutlined, SettingOutlined } from '@ant-design/icons'
-import { hookInstances } from '@/constants/injection.ts'
+import { hookInstances, sidebarCollapsedWidth, sidebarExpandWidth } from '@/constants'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -20,6 +20,7 @@ function baseItemProps(key: string) {
 
 function Sidebar() {
 	const sidebarCollapsed = $sidebarCollapsed.use
+	const menuWidth = { width: sidebarCollapsed ? sidebarCollapsedWidth : sidebarExpandWidth }
 	const items: MenuItem[] = [
 		{ ...baseItemProps('/home'), label: '首頁', icon: <HomeOutlined /> },
 		{
@@ -31,16 +32,19 @@ function Sidebar() {
 	]
 
 	return (
-		<Menu
-			className={'bg-ant-dark-menu h-screen overflow-auto'}
-			style={{ width: sidebarCollapsed ? 80 : 255 }}
-			defaultSelectedKeys={defaultSelectedKeys}
-			defaultOpenKeys={defaultOpenKeys}
-			mode="inline"
-			theme="dark"
-			inlineCollapsed={sidebarCollapsed}
-			items={items}
-		/>
+		<>
+			<Menu
+				className={'fixed left-0 top-0 bg-ant-dark-menu h-screen overflow-auto'}
+				style={menuWidth}
+				defaultSelectedKeys={defaultSelectedKeys}
+				defaultOpenKeys={defaultOpenKeys}
+				mode="inline"
+				theme="dark"
+				inlineCollapsed={sidebarCollapsed}
+				items={items}
+			/>
+			<div className={'ant-menu-transition'} style={menuWidth} />
+		</>
 	)
 }
 

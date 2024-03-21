@@ -3,7 +3,7 @@ import { createPageRoutes } from '~page-routes'
 import { RouteGuard } from '@/components/route/guard.tsx'
 import { ReactNode, Suspense, useMemo } from 'react'
 import { LazyError404 } from '@/components/pages/404.tsx'
-import { hookInstances } from '@/constants/injection.ts'
+import { hookInstances } from '@/constants'
 
 function ErrorPageSuspense({ children }: { children: ReactNode }) {
 	return <Suspense>{children}</Suspense>

@@ -49,6 +49,10 @@ export default defineConfig({
 		['wrap-main', ''],
 	],
 	rules: [
+		[
+			'ant-menu-transition',
+			{ transition: 'width var(--ant-motion-duration-slow) cubic-bezier(0.2, 0, 0, 1) 0s' },
+		],
 		['bgc-none', { background: 'initial' }],
 		[
 			/^shadow-\[(.+)_(.+)]$/,

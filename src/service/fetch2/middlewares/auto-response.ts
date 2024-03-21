@@ -1,6 +1,6 @@
 import type { TsFetchWatchMap } from 'wtbx-type-safe-fetch'
 import { ApiResponse, MyListenerRequestInit } from '@/service/fetch2/type.ts'
-import { hookInstances } from '@/constants/injection.ts'
+import { hookInstances } from '@/constants'
 
 const autoResponse: TsFetchWatchMap<
 	Error,

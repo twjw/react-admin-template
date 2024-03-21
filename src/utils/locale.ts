@@ -1,6 +1,6 @@
 import { locale, Locale, setLocale } from '~i18n'
 import { storage } from '@/service/store/storage.ts'
-import { antdLocale } from '@/constants/injection.ts'
+import { antdLocale } from '@/constants'
 import importAntdLocales from '~import-antd-locales'
 
 function updateAntdLocale<K extends keyof typeof antdLocale>(

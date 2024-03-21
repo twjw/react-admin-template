@@ -17,3 +17,7 @@ export const antdLocale = {
 	configProvider: {} as Record<Locale, AntdLocale>,
 	datePicker: {} as Record<Locale, PickerLocale>,
 }
+
+export const sidebarCollapsedWidth = 80
+
+export const sidebarExpandWidth = 255
