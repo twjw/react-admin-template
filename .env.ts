@@ -3,8 +3,8 @@ const envConfig = {
 	title: 'React 後台模板',
 	vite: {
 		storagePrefix: 'rat', // 緩存前綴
-		username: 'admin',
-		password: '147147',
+		username: 'MANAGER',
+		password: '1234',
 	},
 }
 

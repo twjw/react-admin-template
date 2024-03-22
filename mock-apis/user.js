@@ -3,7 +3,7 @@ export default {
 	'/api/user/login': ({ res, body, query }) => {
 		res.setHeader('Content-Type', 'application/json; charset=utf-8')
 
-		if (!(body.username === 'admin' && body.password === '147147')) {
+		if (!(body.username === 'MANAGER' && body.password === '1234')) {
 			res.statusCode = 500
 			return {
 				code: 500,
