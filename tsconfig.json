@@ -26,6 +26,6 @@
       ]
     }
   },
-  "include": ["page-meta-type.ts", "src/types/common.ts", "src"],
+  "include": ["src/types/common.ts", "src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
