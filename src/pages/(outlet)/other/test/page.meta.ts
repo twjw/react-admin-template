@@ -1,4 +1,4 @@
-import { PageMeta } from '@page-meta-type'
+import { PageMeta } from '@/types/common.ts'
 
 const meta: PageMeta = {}
 

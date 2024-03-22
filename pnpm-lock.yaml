@@ -53,9 +53,9 @@ specifiers:
   wtbx-vite-antd-locale-import: ^1.0.2
   wtbx-vite-auto-alias: ^1.0.1
   wtbx-vite-build-drop-log: ^1.0.0
-  wtbx-vite-i18n: ^1.1.1
   wtbx-vite-inject-env: ^1.0.1
   wtbx-vite-mock-apis: ^1.2.0
+  wtbx-vite-react-i18n: ^1.0.0
   wtbx-vite-react-page-routes: ^2.0.3
 
 dependencies:
@@ -113,9 +113,9 @@ devDependencies:
   wtbx-vite-antd-locale-import: 1.0.2_arrql7rinj3h2pcdvy5iww6pk4
   wtbx-vite-auto-alias: 1.0.1_vite@5.1.6
   wtbx-vite-build-drop-log: 1.0.0_vite@5.1.6
-  wtbx-vite-i18n: 1.1.1_vite@5.1.6
   wtbx-vite-inject-env: 1.0.1_vite@5.1.6
   wtbx-vite-mock-apis: 1.2.0_uj5bb2u63f4ial3woygha6q46a
+  wtbx-vite-react-i18n: 1.0.0_react@18.2.0+vite@5.1.6
   wtbx-vite-react-page-routes: 2.0.3_liiuylxhdlyjn2srdvtzssnoqe
 
 packages:
@@ -4635,14 +4635,6 @@ packages:
       vite: 5.1.6_@types+node@20.11.26
     dev: true
 
-  /wtbx-vite-i18n/1.1.1_vite@5.1.6:
-    resolution: {integrity: sha512-7gaG2Rn5NUDq/il0uvf8rpueoH816UeS9Pch/F7k68ojd4+qFOyAIFyDdKjDTbqYEEuc66fB3xf1+/Z47F6o0g==}
-    peerDependencies:
-      vite: ^5.x.x
-    dependencies:
-      vite: 5.1.6_@types+node@20.11.26
-    dev: true
-
   /wtbx-vite-inject-env/1.0.1_vite@5.1.6:
     resolution: {integrity: sha512-Ad+sKchE1j2hJXl4n82g+dQsCYE5nVRREutFw30juYpXNP+pY9tU6QchB8k/jeBuxRPVx52LLpQa/jsYzfTUSQ==}
     peerDependencies:
@@ -4660,6 +4652,16 @@ packages:
     dependencies:
       body: 5.1.0
       query-string: 8.2.0
+      vite: 5.1.6_@types+node@20.11.26
+    dev: true
+
+  /wtbx-vite-react-i18n/1.0.0_react@18.2.0+vite@5.1.6:
+    resolution: {integrity: sha512-ra5IN6HL2spJ2svZZICim5ASPe1ITFF5lNq+JpM6XR9BLwVP2D/4FPR3LcyddpeSMUyMXjuSWjfWlKkUVmtPaA==}
+    peerDependencies:
+      react: '>=17'
+      vite: '>=4'
+    dependencies:
+      react: 18.2.0
       vite: 5.1.6_@types+node@20.11.26
     dev: true
 

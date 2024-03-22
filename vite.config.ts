@@ -9,15 +9,14 @@ import { autoAlias } from 'wtbx-vite-auto-alias'
 import { buildDropLog } from 'wtbx-vite-build-drop-log'
 import { pageRoutes } from 'wtbx-vite-react-page-routes'
 import path from 'path'
-import { i18n } from 'wtbx-vite-i18n'
+import { i18n } from 'wtbx-vite-react-i18n'
 import UnoCSS from 'unocss/vite'
 import checker from 'vite-plugin-checker'
 import { BASE_FONT_SIZE } from './.config-constants'
 import { merge } from 'lodash-es'
 import { ClintEnv, EnvMode, EnvType } from './.env'
-import { PageMeta } from './page-meta-type'
 import { antdLocaleImport } from 'wtbx-vite-antd-locale-import'
-import { Locale } from './src/types/common'
+import { Locale, PageMeta } from './src/types/common'
 
 const apiPrefix = {
 	// 開發

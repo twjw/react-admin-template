@@ -70,9 +70,9 @@
     "wtbx-vite-antd-locale-import": "^1.0.2",
     "wtbx-vite-auto-alias": "^1.0.1",
     "wtbx-vite-build-drop-log": "^1.0.0",
-    "wtbx-vite-i18n": "^1.1.1",
     "wtbx-vite-inject-env": "^1.0.1",
     "wtbx-vite-mock-apis": "^1.2.0",
+    "wtbx-vite-react-i18n": "^1.0.0",
     "wtbx-vite-react-page-routes": "^2.0.3"
   }
 }
