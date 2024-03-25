@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 # Custom
+package-lock.json
+yarn.lock
