@@ -1,7 +1,7 @@
 import { TsFetchTemplateDefineApis } from 'wtbx-type-safe-fetch'
 import { ApiResponse } from '@/service/fetch2/type.ts'
 
-export declare namespace Login {
+export namespace Login {
 	export type Params = {
 		expiredMinutes?: number
 	}
@@ -14,7 +14,7 @@ export declare namespace Login {
 	}
 }
 
-export declare namespace Profile {
+export namespace Profile {
 	export type Response = {
 		id: number
 		name: string
