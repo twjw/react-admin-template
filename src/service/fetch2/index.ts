@@ -8,6 +8,7 @@ import { envConfig } from '~env-config'
 import { mock } from 'wtbx-type-safe-fetch/middlewares/mock'
 import { log } from 'wtbx-type-safe-fetch/middlewares/log'
 import { auth } from '@/service/fetch2/middlewares/auth.ts'
+import { pathParamsUrl } from 'wtbx-type-safe-fetch/middlewares/path-params-url'
 
 const fetch2 = tsFetch as unknown as TsFetchTemplate<UserApis, MyRequestInitOther>
 
@@ -16,6 +17,9 @@ if (envConfig.vite.isLocal) fetch2.middleware(mock)
 
 // 將路徑的方法轉換成 method
 fetch2.middleware(methodUrl)
+
+// 將路徑參數轉換成匹配的 pathParams key-value
+fetch2.middleware(pathParamsUrl)
 
 // 自動傳入 token 及 response 沒權限踢到登入頁面
 fetch2.middleware(auth)
@@ -27,6 +31,6 @@ fetch2.middleware(paramsAndBodyParser)
 fetch2.middleware(autoResponse)
 
 // log response 與 error
-fetch2.middleware(log)
+if (envConfig.vite.isLocal) fetch2.middleware(log)
 
 export { fetch2 }
