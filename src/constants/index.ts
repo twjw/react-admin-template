@@ -6,11 +6,14 @@ import { Locale } from '~i18n'
 import { Locale as AntdLocale } from 'antd/es/locale'
 import { PickerLocale } from 'antd/es/date-picker/generatePicker/interface'
 
+export type ResetErrorBoundary = (...args: any[]) => void
+
 export const hookInstances = {
 	navigate: null as NavigateFunction | null,
 	message: null as MessageInstance | null,
 	modal: null as HookAPI | null,
 	notification: null as NotificationInstance | null,
+	resetErrorBoundary: null as ResetErrorBoundary | null,
 }
 
 export const antdLocale = {
