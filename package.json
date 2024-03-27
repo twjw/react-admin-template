@@ -72,6 +72,6 @@
     "wtbx-vite-inject-env": "^1.0.2",
     "wtbx-vite-mock-apis": "^1.2.1",
     "wtbx-vite-react-i18n": "^1.0.3",
-    "wtbx-vite-react-page-routes": "^2.0.5"
+    "wtbx-vite-react-page-routes": "^2.0.6"
   }
 }
