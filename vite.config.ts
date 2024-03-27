@@ -55,6 +55,7 @@ export default async ({ mode, command }: { mode: EnvMode; command: 'serve' | 'bu
 			pageRoutes<PageMeta>({
 				pages: [path.resolve(process.cwd(), 'src/pages')],
 				defaultMeta: {
+					homeBread: true,
 					private: true,
 					layout: true,
 				},
