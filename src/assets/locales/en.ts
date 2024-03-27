@@ -8,6 +8,7 @@ const lang = {
 	loginSucceedRedirect: 'Login successful, redirecting your page',
 	succeed: 'Successful',
 	psucceed: '{0} successful',
+	homePage: 'Home',
 } as const
 
 export default lang

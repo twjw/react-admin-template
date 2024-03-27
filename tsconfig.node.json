@@ -7,5 +7,5 @@
     "allowSyntheticDefaultImports": true,
     "strict": true
   },
-  "include": ["vite.config.ts", ".config-constants.ts", ".env*.ts", "src/types/common.ts"]
+  "include": ["vite.config.ts", ".config-constants.ts", ".env*.ts", "src/types/common.d.ts"]
 }

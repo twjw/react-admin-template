@@ -1,8 +1,15 @@
-import { $sidebarCollapsed } from '@/components/layout/atoms.ts'
+import { $sidebarCollapsed } from '@/service/store/atoms/app'
 import type { MenuProps } from 'antd'
 import { Menu } from 'antd'
-import { HomeOutlined, SettingOutlined } from '@ant-design/icons'
+import {
+	HomeOutlined,
+	MenuFoldOutlined,
+	MenuUnfoldOutlined,
+	SettingOutlined,
+} from '@ant-design/icons'
 import { hookInstances, sidebarCollapsedWidth, sidebarExpandWidth } from '@/constants'
+import { envConfig } from '~env-config'
+import { useMemo } from 'react'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -20,29 +27,48 @@ function baseItemProps(key: string) {
 
 function Sidebar() {
 	const sidebarCollapsed = $sidebarCollapsed.use
+	const MenuIcon = sidebarCollapsed ? MenuUnfoldOutlined : MenuFoldOutlined
 	const menuWidth = { width: sidebarCollapsed ? sidebarCollapsedWidth : sidebarExpandWidth }
-	const items: MenuItem[] = [
-		{ ...baseItemProps('/home'), label: '首頁', icon: <HomeOutlined /> },
-		{
-			key: '/other',
-			label: '其他',
-			icon: <SettingOutlined />,
-			children: [{ ...baseItemProps('/other/test'), label: '測試' }],
-		},
-	]
+	const items: MenuItem[] = useMemo(
+		() => [
+			{ ...baseItemProps('/home'), label: '首頁', icon: <HomeOutlined /> },
+			{
+				key: '/other',
+				label: '其他',
+				icon: <SettingOutlined />,
+				children: [{ ...baseItemProps('/other/test'), label: '測試' }],
+			},
+		],
+		[],
+	)
 
 	return (
 		<>
-			<Menu
-				className={'fixed left-0 top-0 bg-ant-dark-menu h-screen overflow-auto'}
-				style={menuWidth}
-				defaultSelectedKeys={defaultSelectedKeys}
-				defaultOpenKeys={defaultOpenKeys}
-				mode="inline"
-				theme="dark"
-				inlineCollapsed={sidebarCollapsed}
-				items={items}
-			/>
+			<div className="fixed left-0 top-0 bg-ant-dark-menu h-screen overflow-auto">
+				<div
+					className={
+						'px-28 pt-24 pb-12 overflow-hidden flex items-center justify-center ant-menu-transition'
+					}
+					style={menuWidth}
+				>
+					{!sidebarCollapsed && (
+						<div className={'c-white font-bold text-18 lh-18 mr-auto truncate'}>
+							{envConfig.title}
+						</div>
+					)}
+					<MenuIcon className={'c-white text-18'} onClick={() => $sidebarCollapsed(e => !e)} />
+				</div>
+				<Menu
+					className={'flex-1'}
+					style={menuWidth}
+					defaultSelectedKeys={defaultSelectedKeys}
+					defaultOpenKeys={defaultOpenKeys}
+					mode="inline"
+					theme="dark"
+					inlineCollapsed={sidebarCollapsed}
+					items={items}
+				/>
+			</div>
 			<div className={'ant-menu-transition'} style={menuWidth} />
 		</>
 	)

@@ -3,6 +3,11 @@ import { storage } from '@/service/store/storage.ts'
 import { antdLocale } from '@/constants'
 import importAntdLocales from '~import-antd-locales'
 
+export const localeDict: Record<Locale, string> = {
+	zh_TW: '繁中',
+	en: 'English',
+}
+
 function updateAntdLocale<K extends keyof typeof antdLocale>(
 	key: K,
 	locale: Locale,

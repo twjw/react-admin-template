@@ -8,6 +8,7 @@ const lang = {
 	loginSucceedRedirect: '登入成功，正為您跳轉頁面',
 	succeed: '成功',
 	psucceed: '{0}成功',
+	homePage: '首頁',
 } as const
 
 export default lang

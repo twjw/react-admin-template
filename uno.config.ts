@@ -40,7 +40,7 @@ export default defineConfig({
 			xxl: `${Breakpoint.xxl}px`,
 		},
 		colors: {
-			'ant-dark-menu': 'var(--ant-menu-dark-item-bg)',
+			'ant-dark-menu': '#001529',
 			'gray-border': 'rgba(5, 5, 5, 0.06)',
 		},
 	},
@@ -49,10 +49,7 @@ export default defineConfig({
 		['wrap-main', ''],
 	],
 	rules: [
-		[
-			'ant-menu-transition',
-			{ transition: 'width var(--ant-motion-duration-slow) cubic-bezier(0.2, 0, 0, 1) 0s' },
-		],
+		['ant-menu-transition', { transition: 'width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s' }],
 		['bgc-none', { background: 'initial' }],
 		[
 			/^shadow-\[(.+)_(.+)]$/,

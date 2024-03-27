@@ -1,6 +1,6 @@
 declare module '~page-routes' {
 	import { type PageRoutes } from 'wtbx-vite-react-page-routes'
-	import { PageMeta } from '@/types/common.ts'
+	import { PageMeta } from '@/types/common'
 
 	export const createPageRoutes: PageRoutes.CreatePageRoutes
 	export const usePageRoute: PageRoutes.UsePageRoute<PageMeta>

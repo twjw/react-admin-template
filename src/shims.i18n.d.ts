@@ -1,7 +1,7 @@
 declare module '~i18n' {
 	import type { I18n } from 'wtbx-vite-react-i18n'
 	import type { RecursiveKeyOf } from 'wtbx-types'
-	import { Locale as _Locale } from '@/types/common.ts'
+	import { Locale as _Locale } from '@/types/common'
 
 	export type Locale = _Locale
 	export type Dictionary = typeof import('@/assets/locales/zh_TW.ts').default
