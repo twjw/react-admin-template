@@ -7,4 +7,5 @@ const name = (name: string) => `${envConfig.vite.storagePrefix}-${name}`
 export const storage = {
 	locale: createValueStorage<Locale>(name('locale'), 'zh_TW'),
 	token: createValueStorage<string | null>(name('token'), null),
+	sidebarCollapsed: createValueStorage<boolean | null>(name('sidebar_collapsed'), null),
 }

@@ -47,9 +47,10 @@ function Sidebar() {
 		<>
 			<div className="fixed left-0 top-0 bg-ant-dark-menu h-screen overflow-auto flex flex-col">
 				<div
-					className={
-						'px-28 pt-24 pb-12 overflow-hidden flex items-center justify-center ant-menu-transition'
-					}
+					className={clsx(
+						'pt-24 pb-12 overflow-hidden flex items-center justify-center ant-menu-transition',
+						sidebarCollapsed ? '' : 'pl-28 pr-20',
+					)}
 					style={menuWidth}
 				>
 					{!sidebarCollapsed && (
@@ -71,8 +72,8 @@ function Sidebar() {
 				/>
 				<div
 					className={clsx(
-						'c-gray3 text-12 mt-12 pb-12 overflow-hidden whitespace-nowrap',
-						sidebarCollapsed ? 'text-center' : 'px-28',
+						'c-gray3 text-12 mt-12 pb-12 overflow-hidden whitespace-nowrap ant-menu-transition',
+						sidebarCollapsed ? 'text-center' : 'pl-28 pr-20',
 					)}
 					style={menuWidth}
 				>
