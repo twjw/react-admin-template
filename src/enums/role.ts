@@ -1,7 +1,7 @@
 import { wenum } from 'wtbx-enum'
 
-// 示範用 enum
-const role = wenum(
+// 示範用 enum(有改過就可以砍掉這段註解)
+export const role = wenum(
 	() =>
 		({
 			SUPER: {
@@ -14,3 +14,5 @@ const role = wenum(
 			},
 		}) as const,
 )
+
+export type UserRole = typeof role.keys extends (infer K)[] ? K : string
