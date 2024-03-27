@@ -3,7 +3,7 @@ import { Locale, locale, t } from '~i18n'
 import { storage } from '@/service/store/storage.ts'
 import { hookInstances } from '@/constants'
 import { usePageRoute } from '~page-routes'
-import { Popover, Select } from 'antd'
+import { Popover, Select, Tooltip } from 'antd'
 import { $userProfile } from '@/service/store/atoms/user.ts'
 import { LogoutOutlined } from '@ant-design/icons'
 import { localeDict, updateLocale } from '@/utils/locale.ts'
@@ -34,7 +34,9 @@ function Header() {
 				{userProfile != null && (
 					<div className={'ml-8 c-gray9 text-14'}>{userProfile.name}</div>
 				)}
-				<LogoutOutlined className={'ml-8 cursor-pointer'} onClick={onLogout} />
+				<Tooltip title={t('logout')} placement={'rightBottom'}>
+					<LogoutOutlined className={'ml-8 cursor-pointer'} onClick={onLogout} />
+				</Tooltip>
 			</div>
 		</div>
 	)
