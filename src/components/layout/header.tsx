@@ -77,8 +77,6 @@ function Breadcrumb() {
 		return breadcrumbs
 	}, [ctx?.path])
 
-	if (!ctx?.meta?.breadcrumbs?.length) return null
-
 	return breadcrumbs.map((e, i) => {
 		return (
 			<Fragment key={i}>

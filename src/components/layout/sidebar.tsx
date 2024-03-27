@@ -10,6 +10,7 @@ import {
 import { hookInstances, sidebarCollapsedWidth, sidebarExpandWidth } from '@/constants'
 import { envConfig } from '~env-config'
 import { useMemo } from 'react'
+import clsx from 'clsx'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -44,7 +45,7 @@ function Sidebar() {
 
 	return (
 		<>
-			<div className="fixed left-0 top-0 bg-ant-dark-menu h-screen overflow-auto">
+			<div className="fixed left-0 top-0 bg-ant-dark-menu h-screen overflow-auto flex flex-col">
 				<div
 					className={
 						'px-28 pt-24 pb-12 overflow-hidden flex items-center justify-center ant-menu-transition'
@@ -68,6 +69,16 @@ function Sidebar() {
 					inlineCollapsed={sidebarCollapsed}
 					items={items}
 				/>
+				<div
+					className={clsx(
+						'c-gray3 text-12 mt-12 pb-12 overflow-hidden whitespace-nowrap',
+						sidebarCollapsed ? 'text-center' : 'px-28',
+					)}
+					style={menuWidth}
+				>
+					{sidebarCollapsed ? '' : 'Version '}
+					{envConfig.vite.version}
+				</div>
 			</div>
 			<div className={'ant-menu-transition'} style={menuWidth} />
 		</>
