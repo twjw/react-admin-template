@@ -2,7 +2,7 @@ import { MyListenerRequestInit } from '@/service/fetch2/type.ts'
 import { storage } from '@/service/store/storage.ts'
 import { hookInstances } from '@/constants'
 
-export function authRequest(req: MyListenerRequestInit) {
+export function passAuthRequest(req: MyListenerRequestInit) {
 	const token = storage.token.getItem()
 
 	if (token != null) {
@@ -11,15 +11,11 @@ export function authRequest(req: MyListenerRequestInit) {
 			Authorization: `Bearer ${token}`,
 		}
 	}
-
-	return req
 }
 
-export function authResponse(req: MyListenerRequestInit, res: Response) {
+export function checkApiPermission(req: MyListenerRequestInit, res: Response) {
 	if (res.status === 403) {
 		storage.token.setItem(null)
 		hookInstances.navigate?.('/', { replace: true })
 	}
-
-	return res
 }

@@ -1,7 +1,7 @@
 import { ApiResponse, MyListenerRequestInit } from '@/service/fetch2/type.ts'
 import { hookInstances } from '@/constants'
 
-export async function autoResponseResponse(req: MyListenerRequestInit, res: Response) {
+export async function commonApiResponse(req: MyListenerRequestInit, res: Response) {
 	const result = await res[req.responseType || 'json']()
 	const success = result?.data?.success || res.status === 200
 	const _message = result?.message
@@ -15,7 +15,7 @@ export async function autoResponseResponse(req: MyListenerRequestInit, res: Resp
 	}
 }
 
-export function autoResponseError(
+export function commonApiErrorResponse(
 	err: Error,
 	req: MyListenerRequestInit,
 	res: ApiResponse<any> | Promise<ApiResponse<any>>,
