@@ -26,11 +26,11 @@ function Header() {
 	return (
 		<div
 			className={
-				'w-full flex items-center py-8 px-24 bg-white b-b-1 b-solid b-gray1 sticky top-0 right-0 z-1 <md:(p-0 pr-12 flex-wrap static b-0)'
+				'w-full flex items-center py-8 px-16 bg-white b-b-1 b-solid b-gray1 sticky top-0 right-0 z-1 <md:(p-0 pr-12 flex-wrap static b-0)'
 			}
 		>
 			{lessEqualsMd && (
-				<div className={'flex flex-1 items-center'}>
+				<div className={'flex flex-1 items-center mr-6'}>
 					<MenuIcon className={'p-12'} />
 					<div className={'text-14 font-bold c-gray9'}>{envConfig.title}</div>
 				</div>
@@ -42,9 +42,9 @@ function Header() {
 				<Popover className={'cursor-pointer'} content={LangPopContent}>
 					<div className={'c-gray9 text-14 <md:(text-12)'}>{localeDict[locale]}</div>
 				</Popover>
-				<div className="ml-8 bg-gray2 h-16px w-1px" />
+				<div className="ml-8 bg-gray2 h-16px w-1px <md:(ml-6)" />
 				{userProfile != null && (
-					<div className={'ml-8 c-gray9 text-14 <md:(text-12)'}>{userProfile.name}</div>
+					<div className={'ml-8 c-gray9 text-14 <md:(text-12 ml-6)'}>{userProfile.name}</div>
 				)}
 				<Tooltip title={t('logout')} placement={'rightBottom'}>
 					<LogoutOutlined
