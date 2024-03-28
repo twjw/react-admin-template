@@ -1,7 +1,7 @@
 import { envConfig } from '~env-config'
 import { Locale, locale, t } from '~i18n'
 import { storage } from '@/service/store/storage.ts'
-import { hookInstances } from '@/constants'
+import { Breakpoint, hookInstances } from '@/constants'
 import { usePageRoute } from '~page-routes'
 import { Popover, Select, Tooltip } from 'antd'
 import { $userProfile } from '@/service/store/atoms/user.ts'
@@ -9,9 +9,13 @@ import { LogoutOutlined } from '@ant-design/icons'
 import { localeDict, updateLocale } from '@/utils/locale.ts'
 import { Fragment, useMemo } from 'react'
 import type { Breadcrumb } from '@/types/common'
+import { MenuIcon } from '@/components/layout/menu-icon.tsx'
+import { $breakpoint } from '@/service/store/atoms/app.ts'
 
 function Header() {
 	const userProfile = $userProfile.use
+	const breakpoint = $breakpoint.use
+	const lessEqualsMd = breakpoint <= Breakpoint.md
 
 	function onLogout() {
 		storage.token.setItem(null)
@@ -22,20 +26,31 @@ function Header() {
 	return (
 		<div
 			className={
-				'w-full flex items-center py-8 px-24 bg-white b-b-1 b-solid b-gray1 sticky top-0 right-0 z-1'
+				'w-full flex items-center py-8 px-24 bg-white b-b-1 b-solid b-gray1 sticky top-0 right-0 z-1 <md:(p-0 pr-12 flex-wrap static b-0)'
 			}
 		>
-			<Breadcrumb />
-			<div className={'ml-auto flex items-center'}>
+			{lessEqualsMd && (
+				<div className={'flex flex-1 items-center'}>
+					<MenuIcon className={'p-12'} />
+					<div className={'text-14 font-bold c-gray9'}>{envConfig.title}</div>
+				</div>
+			)}
+			<div className={'inline-flex items-center <md:(order-1 w-full px-12 pb-6)'}>
+				<Breadcrumb />
+			</div>
+			<div className={'ml-auto flex items-center <md:(flex-2 justify-end)'}>
 				<Popover className={'cursor-pointer'} content={LangPopContent}>
-					{localeDict[locale]}
+					<div className={'c-gray9 text-14 <md:(text-12)'}>{localeDict[locale]}</div>
 				</Popover>
 				<div className="ml-8 bg-gray2 h-16px w-1px" />
 				{userProfile != null && (
-					<div className={'ml-8 c-gray9 text-14'}>{userProfile.name}</div>
+					<div className={'ml-8 c-gray9 text-14 <md:(text-12)'}>{userProfile.name}</div>
 				)}
 				<Tooltip title={t('logout')} placement={'rightBottom'}>
-					<LogoutOutlined className={'ml-8 cursor-pointer'} onClick={onLogout} />
+					<LogoutOutlined
+						className={'ml-8 cursor-pointer <md:(text-12 ml-4)'}
+						onClick={onLogout}
+					/>
 				</Tooltip>
 			</div>
 		</div>

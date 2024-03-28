@@ -3,10 +3,12 @@ import { App as I18nApp, locale } from '~i18n'
 import { Routes } from '@/app/routes.tsx'
 import { App as AntdApp, ConfigProvider } from 'antd'
 import { ReactNode, useEffect, useState } from 'react'
-import { antdLocale, hookInstances } from '@/constants'
+import { antdLocale, breakpoints, hookInstances } from '@/constants'
 import { storage } from '@/service/store/storage.ts'
 import { Locale } from 'antd/es/locale'
 import { updateLocale } from '@/utils/locale.ts'
+import { useRwd } from '@/components/rwd-element'
+import { $breakpoint } from '@/service/store/atoms/app.ts'
 
 function App() {
 	return (
@@ -16,8 +18,19 @@ function App() {
 					<Routes />
 				</AntdProvider>
 			</I18nApp>
+			<BreakpointListener />
 		</BrowserRouter>
 	)
+}
+
+function BreakpointListener() {
+	const [breakpoint] = useRwd(breakpoints as unknown as number[])
+
+	useEffect(() => {
+		$breakpoint(breakpoint)
+	}, [breakpoint])
+
+	return null
 }
 
 function AntdProvider({ children }: { children: ReactNode }) {

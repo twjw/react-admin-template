@@ -24,3 +24,24 @@ export const antdLocale = {
 export const sidebarCollapsedWidth = 80
 
 export const sidebarExpandWidth = 255
+
+export const Breakpoint = {
+	xxs: 0,
+	xs: 320,
+	sm: 480,
+	smd: 569,
+	md: 768,
+	lg: 1024,
+	xl: 1280,
+	xxl: 1600,
+}
+
+export const breakpoints = [
+	Breakpoint.xs,
+	Breakpoint.sm,
+	Breakpoint.smd,
+	Breakpoint.md,
+	Breakpoint.lg,
+	Breakpoint.xl,
+	Breakpoint.xxl,
+] as const

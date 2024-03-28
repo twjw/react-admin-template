@@ -3,17 +3,7 @@ import { presetRem121 } from 'wtbx-uno-preset-rem-121'
 import { BASE_FONT_SIZE } from './.config-constants'
 import { presetAntdColorsTheme } from 'wtbx-uno-preset-antd-colors-theme'
 import transformerVariantGroup from '@unocss/transformer-variant-group'
-
-enum Breakpoint {
-	xxs = 0,
-	xs = 320,
-	sm = 480,
-	smd = 569,
-	md = 768,
-	lg = 1024,
-	xl = 1280,
-	xxl = 1600,
-}
+import { Breakpoint } from './src/constants'
 
 export default defineConfig({
 	presets: [
@@ -49,7 +39,11 @@ export default defineConfig({
 		['wrap-main', ''],
 	],
 	rules: [
-		['ant-menu-transition', { transition: 'width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s' }],
+		['ant-menu-width-transition', { transition: 'width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s' }],
+		[
+			'ant-menu-transform-transition',
+			{ transition: 'transform 0.3s cubic-bezier(0.2, 0, 0, 1) 0s' },
+		],
 		['bgc-none', { background: 'initial' }],
 		[
 			/^shadow-\[(.+)_(.+)]$/,
