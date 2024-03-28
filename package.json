@@ -31,7 +31,7 @@
     "wtbx-create-value-storage": "^1.0.1",
     "wtbx-enum": "^2.0.2",
     "wtbx-react-atom": "^1.0.2",
-    "wtbx-type-safe-fetch": "^2.0.1"
+    "wtbx-type-safe-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@ant-design/colors": "^7.0.2",
