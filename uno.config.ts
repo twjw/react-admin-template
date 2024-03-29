@@ -41,6 +41,10 @@ export default defineConfig({
 	rules: [
 		['ant-menu-width-transition', { transition: 'width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s' }],
 		[
+			'ant-menu-width-transition-half',
+			{ transition: 'width 0.15s cubic-bezier(0.2, 0, 0, 1) 0s' },
+		],
+		[
 			'ant-menu-transform-transition',
 			{ transition: 'transform 0.3s cubic-bezier(0.2, 0, 0, 1) 0s' },
 		],

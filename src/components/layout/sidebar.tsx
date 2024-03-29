@@ -1,10 +1,7 @@
 import { $breakpoint, $sidebarCollapsed } from '@/service/store/atoms/app'
-import type { MenuProps } from 'antd'
-import { Menu } from 'antd'
 import { HomeOutlined, SettingOutlined } from '@ant-design/icons'
 import {
 	Breakpoint,
-	hookInstances,
 	sidebarCollapsedWidth,
 	sidebarExpandWidth,
 } from '@/constants'
@@ -14,20 +11,7 @@ import clsx from 'clsx'
 import { MenuIcon } from '@/components/layout/menu-icon.tsx'
 import { Transition } from 'react-transition-group'
 import { TransitionStatus } from 'react-transition-group/Transition'
-
-type MenuItem = Required<MenuProps>['items'][number]
-
-const defaultSelectedKeys = [location.pathname]
-const defaultOpenKeys = [location.pathname]
-
-function baseItemProps(key: string) {
-	return {
-		key,
-		onClick() {
-			hookInstances.navigate?.(key)
-		},
-	}
-}
+import { useLocation, useNavigate } from 'react-router-dom'
 
 function Sidebar() {
 	const sidebarCollapsed = $sidebarCollapsed.use
@@ -68,7 +52,7 @@ function Sidebar() {
 					<div
 						className={clsx(
 							'pt-24 pb-12 overflow-hidden flex items-center justify-center ant-menu-width-transition',
-							menuCollapsed ? '' : 'pl-28 pr-20',
+							menuCollapsed ? '' : 'px-20',
 						)}
 						style={menuWidth}
 					>
@@ -80,20 +64,11 @@ function Sidebar() {
 						{lessEqualsMd ? null : <MenuIcon className={'c-white'} />}
 					</div>
 				)}
-				<Menu
-					className={'flex-1'}
-					style={menuWidth}
-					defaultSelectedKeys={defaultSelectedKeys}
-					defaultOpenKeys={defaultOpenKeys}
-					mode="inline"
-					theme="dark"
-					inlineCollapsed={menuCollapsed}
-					items={items}
-				/>
+				<MyMenu />
 				<div
 					className={clsx(
 						'c-gray3 text-12 mt-12 pb-12 overflow-hidden whitespace-nowrap ant-menu-width-transition',
-						menuCollapsed ? 'text-center' : 'pl-28 pr-20',
+						menuCollapsed ? 'text-center' : 'px-20',
 					)}
 					style={menuWidth}
 				>
@@ -102,6 +77,80 @@ function Sidebar() {
 				</div>
 			</div>
 		</>
+	)
+}
+
+function MyMenu() {
+	const sidebarCollapsed = $sidebarCollapsed.use
+	const breakpoint = $breakpoint.use
+	const lessEqualsMd = breakpoint <= Breakpoint.md
+	const location = useLocation()
+	const navigate = useNavigate()
+	const menuCollapsed = lessEqualsMd ? false : sidebarCollapsed
+	const collapsedItemStyle = menuCollapsed ? { width: 0 } : { width: '100%', padding: '0 6px' }
+	const toggleItemClassName = 'flex items-center justify-center cursor-pointer py-8'
+	const childItemClassName = clsx(
+		'text-15  py-6 c-white opacity-75 cursor-pointer hover:opacity-100',
+		menuCollapsed ? 'px-12' : 'pl-24',
+	)
+	const collapsedIcon = <UpOutlined className={'ml-auto c-white text-16'} />
+	const expandIcon = <DownOutlined className={'ml-auto c-white text-16'} />
+
+	function ToggleItemElement({
+		Icon,
+		text,
+	}: {
+		Icon: (props: { className?: string }) => ReactNode
+		text: string
+	}) {
+		return (
+			<>
+				<Icon className={'c-white text-16'} />
+				<div
+					className={
+						'ant-menu-width-transition-half c-white whitespace-nowrap text-16 overflow-hidden'
+					}
+					style={collapsedItemStyle}
+				>
+					{text}
+				</div>
+			</>
+		)
+	}
+
+	function ChildMenuItem(
+		menuItemProps: Omit<MenuItemProps, 'className' | 'onClick' | 'activeClassName'>,
+	) {
+		function onClick() {
+			if (menuItemProps.path) navigate(menuItemProps.path)
+		}
+
+		return (
+			<MenuItem
+				{...menuItemProps}
+				className={childItemClassName}
+				activeClassName={
+					location.pathname === menuItemProps.path ? '!opacity-100 !bg-blue rd-8' : undefined
+				}
+				onClick={onClick}
+			/>
+		)
+	}
+
+	return (
+		<Menu
+			collapsed={menuCollapsed}
+			className={clsx('flex-1 px-20', menuCollapsed ? '!px-0' : 'overflow-auto')}
+		>
+			<MenuItem
+				className={toggleItemClassName}
+				element={<ToggleItemElement Icon={SettingOutlined} text={t('merchantAdmin')} />}
+				collapsedIcon={collapsedIcon}
+				expandIcon={expandIcon}
+			>
+				<ChildMenuItem path={'/merchant/material'} element={t('rawMaterialManagement')} />
+			</MenuItem>
+		</Menu>
 	)
 }
 
