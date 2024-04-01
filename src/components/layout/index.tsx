@@ -1,7 +1,7 @@
 import { ReactNode, useMemo } from 'react'
 import { Header } from '@/components/layout/header.tsx'
-import { Sidebar } from '@/components/layout/sidebar.tsx'
 import { usePageRoute } from '~page-routes'
+import { Sidebar } from '@/components/layout/sidebar.tsx'
 
 function Layout({ children }: { children: ReactNode }) {
 	const ctx = usePageRoute()
