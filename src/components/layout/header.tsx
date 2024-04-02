@@ -1,7 +1,7 @@
 import { envConfig } from '~env-config'
 import { Locale, locale, t } from '~i18n'
 import { storage } from '@/service/store/storage.ts'
-import { Breakpoint, hookInstances } from '@/constants'
+import { hookInstances } from '@/constants'
 import { usePageRoute } from '~page-routes'
 import { Popover, Select, Tooltip } from 'antd'
 import { $userProfile } from '@/service/store/atoms/user.ts'
@@ -9,13 +9,9 @@ import { LogoutOutlined } from '@ant-design/icons'
 import { localeDict, updateLocale } from '@/utils/locale.ts'
 import { Fragment, useMemo } from 'react'
 import type { Breadcrumb } from '@/types/common'
-import { MenuIcon } from '@/components/layout/menu-icon.tsx'
-import { $breakpoint } from '@/service/store/atoms/app.ts'
 
 function Header() {
 	const userProfile = $userProfile.use
-	const breakpoint = $breakpoint.use
-	const lessEqualsMd = breakpoint <= Breakpoint.md
 
 	function onLogout() {
 		storage.token.setItem(null)
@@ -26,13 +22,9 @@ function Header() {
 	return (
 		<div
 			className={
-				'w-full flex items-center py-8 px-16 bg-white b-b-1 b-solid b-gray1 sticky top-0 right-0 z-1 <md:(p-0 pr-12 flex-wrap static b-0)'
+				'w-full flex items-center py-8 px-16 bg-white shadow-sm sticky top-0 right-0 z-1 <md:(p-0 pr-12 flex-wrap static b-0)'
 			}
 		>
-			{lessEqualsMd && <MenuIcon className={'p-12'} />}
-			<div className={'text-18 font-bold c-gray9 mr-12 <md:(text-14 mr-6)'}>
-				{envConfig.title}
-			</div>
 			<div className={'inline-flex items-center <md:(order-1 w-full px-12 pb-6)'}>
 				<Breadcrumb />
 			</div>

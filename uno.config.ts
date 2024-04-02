@@ -31,6 +31,7 @@ export default defineConfig({
 		},
 		colors: {
 			'ant-dark-menu': '#001529',
+			'light-gray': '#E8EBED',
 			'gray-border': 'rgba(5, 5, 5, 0.06)',
 		},
 	},

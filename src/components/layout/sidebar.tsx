@@ -68,7 +68,7 @@ const menus: Menu[] = [
 function Item({ item, level }: { item: Menu; level: number }) {
 	return (
 		<>
-			<div className={'c-white flex items-center'} style={{ paddingLeft: level * 16 }}>
+			<div className={'py-40 flex items-center'} style={{ paddingLeft: level * 16 }}>
 				{t(item.dict)}
 			</div>
 			{item?.children != null &&
@@ -81,7 +81,9 @@ export function Sidebar() {
 	return (
 		<>
 			<div
-				className={'fixed left-0 top-0 h-full bg-ant-dark-menu'}
+				className={
+					'fixed left-0 top-0 h-full bg-white b-r-1 b-solid b-light-gray overflow-auto'
+				}
 				style={{ width: sidebarExpandWidth }}
 			>
 				{menus.map((e, i) => (

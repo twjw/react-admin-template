@@ -14,7 +14,7 @@ function Layout({ children }: { children: ReactNode }) {
 					<Sidebar />
 					<div className="relative z-0 flex-1 flex flex-col bg-geekblue1">
 						<Header />
-						<div className={'flex-1 flex flex-col bg-white px-24 py-12'}>{children}</div>
+						<div className={'flex-1 flex flex-col bg-geekblue1 px-24 py-12'}>{children}</div>
 					</div>
 				</div>
 			) : (
