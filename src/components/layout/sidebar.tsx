@@ -2,7 +2,6 @@ import { sidebarCollapsedWidth, sidebarExpandWidth } from '@/constants'
 import {
 	createContext,
 	Dispatch,
-	HTMLAttributes,
 	ReactNode,
 	RefObject,
 	SetStateAction,
@@ -34,8 +33,7 @@ type SidebarItemProps = {
 type SidebarItemContext = {
 	collapsed?: boolean
 	setCollapsed?: Dispatch<SetStateAction<boolean>>
-	isChildMatchTo?: boolean
-	setIsChildMatchTo?: Dispatch<SetStateAction<boolean>>
+	childrenTos: Set<string>
 	parent?: SidebarItemContext | null
 }
 const sidebarItemContext = createContext(null as unknown as SidebarItemContext)
@@ -84,11 +82,7 @@ function SidebarItem({
 	to,
 	onClick,
 }: SidebarItemProps) {
-	const {
-		collapsed: sidebarCollapsed,
-		pageRoute,
-		isMouseEnter,
-	} = useContext(sidebarWrapContext)
+	const { collapsed: sidebarCollapsed, pageRoute, isMouseEnter } = useContext(sidebarContext)
 	const context = useContext(sidebarItemContext)
 	const childrenWrapRef = useRef<HTMLDivElement>(null)
 	const Item = to == null ? 'div' : Link
@@ -98,43 +92,43 @@ function SidebarItem({
 		: ([] as unknown as [boolean, Dispatch<SetStateAction<boolean>>])
 	const [isChildMatchTo, setIsChildMatchTo] = useState(false)
 	const isMatchTo = isChildMatchTo || (to != null && pageRoute?.path === to)
-	const self = useMemo(
+	const self = useMemo<SidebarItemContext>(
 		() => ({
 			content,
 			collapsed,
 			setCollapsed,
-			isChildMatchTo,
-			setIsChildMatchTo,
+			childrenTos: new Set<string>(),
 			parent: context,
 		}),
-		[context],
+		[],
 	)
 
 	useSlideUpDown(childrenWrapRef, collapsed, sidebarChildrenTransitionTimeout)
 
-	// 初始化展開對應的 item
 	useEffect(() => {
-		if (isMatchTo) {
-			let parent: SidebarItemContext | null | undefined = self?.parent
+		let parent: SidebarItemContext | null | undefined = self?.parent
 
+		if (to != null && parent != null) {
+			parent.childrenTos.add(to)
+		}
+
+		// 初始化展開對應的 item
+		if (isMatchTo) {
 			while (parent != null) {
+				if (to != null) parent.childrenTos.add(to)
+
 				if (parent.collapsed === false) {
 					parent.setCollapsed?.(true)
 				}
+
 				parent = parent?.parent
 			}
 		}
 	}, [])
 
-	// 高亮父層
 	useEffect(() => {
-		let parent: SidebarItemContext | null | undefined = self?.parent
-
-		while (parent != null) {
-			parent.setIsChildMatchTo?.(isMatchTo)
-			parent = parent?.parent
-		}
-	}, [isMatchTo])
+		setIsChildMatchTo(self.childrenTos.has(pageRoute?.path || ''))
+	}, [pageRoute?.path])
 
 	function onClickItem() {
 		if (hasChildren) setCollapsed(e => !e)
@@ -159,16 +153,18 @@ function SidebarItem({
 						className={clsx('transition-colors text-14', isMatchTo ? 'c-white' : 'c-gray6')}
 					/>
 				)}
-				<div
-					className={clsx(
-						'transition-colors flex-1 px-8 truncate text-14',
-						isMatchTo ? 'c-white' : 'c-gray6',
-					)}
-				>
-					{content}
-				</div>
+				{!isMouseEnter && sidebarCollapsed ? null : (
+					<div
+						className={clsx(
+							'transition-colors flex-1 px-8 truncate text-14',
+							isMatchTo ? 'c-white' : 'c-gray6',
+						)}
+					>
+						{content}
+					</div>
+				)}
 				{hasChildren &&
-					(collapsed ? (
+					(!isMouseEnter && sidebarCollapsed ? null : collapsed ? (
 						<UpOutlined
 							className={clsx('transition-colors', isMatchTo ? 'c-white' : 'c-gray6')}
 						/>
@@ -178,10 +174,14 @@ function SidebarItem({
 						/>
 					))}
 			</Item>
-			{sidebarCollapsed ? null : hasChildren ? (
+			{hasChildren ? (
 				<div
 					ref={childrenWrapRef}
-					className={clsx('pl-16 overflow-hidden rd-8 pt-8', childrenClassName)}
+					className={clsx(
+						'pl-16 overflow-hidden rd-8 pt-8',
+						!isMouseEnter && sidebarCollapsed && 'hidden',
+						childrenClassName,
+					)}
 					style={sidebarDefaultChildrenStyle}
 				>
 					{children}
@@ -193,75 +193,74 @@ function SidebarItem({
 	)
 }
 
-type SidebarWrapContext = {
+type SidebarContext = {
 	collapsed: boolean
 	isMouseEnter: boolean
 	pageRoute: PageRoutes.PageRoute<PageMeta> | null
 }
-const sidebarWrapContext = createContext(null as unknown as SidebarWrapContext)
-function SidebarWrap({ children, onMouseEnter, ...attrs }: HTMLAttributes<HTMLDivElement>) {
+const sidebarContext = createContext(null as unknown as SidebarContext)
+
+export function Sidebar() {
 	const sidebarCollapsed = $sidebarCollapsed.use
 	const pageRoute = usePageRoute()
 	const [isMouseEnter, setIsMouseEnter] = useState(false)
-	const self: SidebarWrapContext = {
+	const self: SidebarContext = {
 		collapsed: sidebarCollapsed,
 		isMouseEnter,
 		pageRoute,
 	}
+	const spaceStyle = {
+		width: sidebarCollapsed && !isMouseEnter ? sidebarCollapsedWidth : sidebarExpandWidth,
+	}
 
-	return (
-		<sidebarWrapContext.Provider value={self}>
-			<div onMouseEnter={onMouseEnter} {...attrs}>
-				{children}
-			</div>
-		</sidebarWrapContext.Provider>
-	)
-}
+	function onMouseEnter() {
+		setIsMouseEnter(true)
+	}
 
-export function Sidebar() {
-	const sidebarCollapsed = $sidebarCollapsed.use
-	const menuWidthStyle = {
-		width: sidebarCollapsed ? sidebarCollapsedWidth : sidebarExpandWidth,
+	function onMouseLeave() {
+		setIsMouseEnter(false)
 	}
 
 	return (
-		<>
+		<sidebarContext.Provider value={self}>
 			<div
 				className={
 					'fixed left-0 top-0 h-full bg-white b-r-1 b-solid b-light-gray overflow-auto ant-menu-width-transition'
 				}
-				style={menuWidthStyle}
+				onMouseEnter={onMouseEnter}
+				onMouseLeave={onMouseLeave}
+				style={spaceStyle}
 			>
 				<div className="px-12">
 					<div
-						className={'mt-8 mx-8 mb-18 c-gray9 font-bold text-20'}
+						className={
+							'mt-8 mx-8 mb-18 c-gray9 font-bold text-20 overflow-hidden whitespace-nowrap'
+						}
 						onClick={() => $sidebarCollapsed(e => !e)}
 					>
 						{envConfig.title}
 					</div>
 
-					<SidebarWrap>
-						<SidebarItem Icon={HomeOutlined} content={'上上層'}>
-							<SidebarItem content={'首頁1'} to={'/home'} />
-							<SidebarItem content={'首頁2'} to={'/home'} />
-
-							<SidebarItem Icon={HomeOutlined} content={'上層'}>
-								<SidebarItem content={'首頁3'} to={'/home'} />
-								<SidebarItem content={'test1'} to={'/other/test'} />
-							</SidebarItem>
-						</SidebarItem>
-
-						<SidebarItem content={'首頁5'} to={'/home'} />
-						<SidebarItem content={'test2'} to={'/other/test'} />
+					<SidebarItem Icon={HomeOutlined} content={'上上層'}>
+						<SidebarItem content={'首頁1'} to={'/home'} />
+						<SidebarItem content={'首頁2'} to={'/home'} />
 
 						<SidebarItem Icon={HomeOutlined} content={'上層'}>
-							<SidebarItem content={'首頁7'} to={'/home'} />
-							<SidebarItem content={'首頁8'} to={'/home'} />
+							<SidebarItem content={'首頁3'} to={'/home'} />
+							<SidebarItem content={'test1'} to={'/other/test'} />
 						</SidebarItem>
-					</SidebarWrap>
+					</SidebarItem>
+
+					<SidebarItem content={'首頁5'} to={'/home'} />
+					<SidebarItem content={'test2'} to={'/other/test'} />
+
+					<SidebarItem Icon={HomeOutlined} content={'上層'}>
+						<SidebarItem content={'首頁7'} to={'/home'} />
+						<SidebarItem content={'首頁8'} to={'/home'} />
+					</SidebarItem>
 				</div>
 			</div>
-			<div className={'ant-menu-width-transition'} style={menuWidthStyle} />
-		</>
+			<div className={'ant-menu-width-transition'} style={spaceStyle} />
+		</sidebarContext.Provider>
 	)
 }
