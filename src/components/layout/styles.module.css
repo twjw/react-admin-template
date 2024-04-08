@@ -1,0 +1,9 @@
+.sidebarItem {
+	&:hover {
+		@apply 'hover:bg-geekblue10';
+
+		& * {
+			@apply 'c-white';
+		}
+	}
+}

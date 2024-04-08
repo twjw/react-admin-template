@@ -3,6 +3,7 @@ import { presetRem121 } from 'wtbx-uno-preset-rem-121'
 import { BASE_FONT_SIZE } from './.config-constants'
 import { presetAntdColorsTheme } from 'wtbx-uno-preset-antd-colors-theme'
 import transformerVariantGroup from '@unocss/transformer-variant-group'
+import transformerDirectives from '@unocss/transformer-directives'
 import { Breakpoint } from './src/constants'
 
 export default defineConfig({
@@ -17,7 +18,7 @@ export default defineConfig({
 		presetAntdColorsTheme() as any,
 		presetRem121({ baseFontSize: BASE_FONT_SIZE }) as any,
 	],
-	transformers: [transformerVariantGroup() as any],
+	transformers: [transformerVariantGroup() as any, transformerDirectives() as any],
 	theme: {
 		breakpoints: {
 			xxs: `${Breakpoint.xxs}px`,
