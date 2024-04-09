@@ -1,6 +1,6 @@
 const envConfig = {
 	port: 9487,
-	title: 'React 後台模板',
+	title: '後台模板',
 	vite: {
 		storagePrefix: 'rat', // 緩存前綴
 		username: 'MANAGER',

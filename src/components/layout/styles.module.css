@@ -7,3 +7,13 @@
 		}
 	}
 }
+
+.sidebarParentItem {
+	&:hover {
+		@apply 'hover:c-geekblue6';
+
+		& * {
+			@apply 'c-geekblue6';
+		}
+	}
+}

@@ -1,42 +1,33 @@
-import { sidebarCollapsedWidth, sidebarExpandWidth } from '@/constants'
-import {
-	createContext,
-	Dispatch,
-	ReactNode,
-	RefObject,
-	SetStateAction,
-	useContext,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from 'react'
-import { DownOutlined, HomeOutlined, UpOutlined } from '@ant-design/icons'
-import clsx from 'clsx'
-import { Link } from 'react-router-dom'
-import { usePageRoute } from '~page-routes'
+import { Breakpoint, sidebarCollapsedWidth, sidebarExpandWidth } from '@/constants'
+import { ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react'
 import { envConfig } from '~env-config'
-import styles from './styles.module.css'
-import { $sidebarCollapsed } from '@/service/store/atoms/app.ts'
-import { type PageRoutes } from 'wtbx-vite-react-page-routes'
+import { $breakpoint, $sidebarCollapsed } from '@/service/store/atoms/app.ts'
+import { DownOutlined, HomeOutlined, SettingOutlined, UpOutlined } from '@ant-design/icons'
+import { KeyofDictionary, t } from '~i18n'
+import clsx from 'clsx'
+import styles from '@/components/layout/styles.module.css'
+import mitt, { Handler } from 'mitt'
+import { usePageRoute } from '~page-routes'
 import { PageMeta } from '@/types/common'
+import { Link } from 'react-router-dom'
+import { toggleSidebarCollapsed } from '@/service/store/actions/app.ts'
+
+type Menu = {
+	key?: string // key 沒填 path 來補，兩個要填一個，且要唯一
+	path?: string
+	icon?: (props: { className?: string }) => ReactNode
+	label: KeyofDictionary
+	children?: Menu[]
+}
 
 type SidebarItemProps = {
-	className?: string
-	childrenClassName?: string
-	Icon?: (props: { className?: string }) => ReactNode
-	content?: ReactNode
-	children?: ReactNode
-	to?: string
-	onClick?: () => void
+	item: Menu
+	sidebarCollapsed: boolean
+	isMouseEnter: boolean
+	level?: number
 }
-type SidebarItemContext = {
-	collapsed?: boolean
-	setCollapsed?: Dispatch<SetStateAction<boolean>>
-	childrenTos: Set<string>
-	parent?: SidebarItemContext | null
-}
-const sidebarItemContext = createContext(null as unknown as SidebarItemContext)
+
+const sidebarEmitter = mitt()
 const sidebarChildrenTransitionTimeout = 300
 const sidebarDefaultChildrenStyle = {
 	transition: `height ${sidebarChildrenTransitionTimeout}ms cubic-bezier(0.2, 0, 0, 1) 0s`,
@@ -73,104 +64,74 @@ function useSlideUpDown(domRef: RefObject<HTMLElement>, collapsed: boolean, time
 	}, [collapsed])
 }
 
-function SidebarItem({
-	className,
-	childrenClassName,
-	Icon,
-	content,
-	children,
-	to,
-	onClick,
-}: SidebarItemProps) {
-	const { collapsed: sidebarCollapsed, pageRoute, isMouseEnter } = useContext(sidebarContext)
-	const context = useContext(sidebarItemContext)
+function SidebarItem({ item, sidebarCollapsed, isMouseEnter, level = 1 }: SidebarItemProps) {
+	const [collapsed, setCollapsed] = useState(false)
+	const [active, setActive] = useState(false)
+	const hasChildren = item.children != null && item.children.length > 0
+	const Item = item.path == null ? 'div' : Link
 	const childrenWrapRef = useRef<HTMLDivElement>(null)
-	const Item = to == null ? 'div' : Link
-	const hasChildren = children != null
-	const [collapsed, setCollapsed] = hasChildren
-		? useState(false)
-		: ([] as unknown as [boolean, Dispatch<SetStateAction<boolean>>])
-	const [isChildMatchTo, setIsChildMatchTo] = useState(false)
-	const isMatchTo = isChildMatchTo || (to != null && pageRoute?.path === to)
-	const self = useMemo<SidebarItemContext>(
-		() => ({
-			content,
-			collapsed,
-			setCollapsed,
-			childrenTos: new Set<string>(),
-			parent: context,
-		}),
-		[],
-	)
 
 	useSlideUpDown(childrenWrapRef, collapsed, sidebarChildrenTransitionTimeout)
 
 	useEffect(() => {
-		let parent: SidebarItemContext | null | undefined = self?.parent
+		const type = item.key || item.path
 
-		if (to != null && parent != null) {
-			parent.childrenTos.add(to)
-		}
-
-		// 初始化展開對應的 item
-		if (isMatchTo) {
-			while (parent != null) {
-				if (to != null) parent.childrenTos.add(to)
-
-				if (parent.collapsed === false) {
-					parent.setCollapsed?.(true)
-				}
-
-				parent = parent?.parent
+		if (type) {
+			const handler: Handler<any> = (active: boolean) => {
+				setActive(active)
+				if (hasChildren && active) setCollapsed(true)
 			}
+
+			sidebarEmitter.on(type, handler)
+			return () => sidebarEmitter.off(type, handler)
 		}
 	}, [])
 
-	useEffect(() => {
-		setIsChildMatchTo(self.childrenTos.has(pageRoute?.path || ''))
-	}, [pageRoute?.path])
-
-	function onClickItem() {
-		if (hasChildren) setCollapsed(e => !e)
-		onClick?.()
-	}
-
 	return (
-		<sidebarItemContext.Provider value={self}>
+		<div>
 			<Item
 				className={clsx(
-					'flex items-center py-8 px-12 transition-colors rd-8',
-					(hasChildren || onClick != null) && 'cursor-pointer',
-					isMatchTo && 'bg-geekblue10',
-					styles.sidebarItem,
-					className,
+					'flex items-center justify-center py-8 px-12 transition-colors rd-8',
+					hasChildren && 'cursor-pointer',
+					active && (hasChildren ? '' : 'bg-geekblue10'),
+					hasChildren ? styles.sidebarParentItem : styles.sidebarItem,
 				)}
-				to={to as any}
-				onClick={onClickItem}
+				onClick={() => setCollapsed(e => !e)}
+				style={{ paddingLeft: level * 16 }}
+				to={item.path as any}
 			>
-				{Icon != null && (
-					<Icon
-						className={clsx('transition-colors text-14', isMatchTo ? 'c-white' : 'c-gray6')}
+				{item.icon != null && (
+					<item.icon
+						className={clsx(
+							'transition-colors text-14',
+							active ? (hasChildren ? 'c-geekblue6' : 'c-white') : 'c-gray6',
+						)}
 					/>
 				)}
 				{!isMouseEnter && sidebarCollapsed ? null : (
 					<div
 						className={clsx(
 							'transition-colors flex-1 px-8 truncate text-14',
-							isMatchTo ? 'c-white' : 'c-gray6',
+							active ? (hasChildren ? 'c-geekblue6' : 'c-white') : 'c-gray6',
 						)}
 					>
-						{content}
+						{t(item.label)}
 					</div>
 				)}
 				{hasChildren &&
 					(!isMouseEnter && sidebarCollapsed ? null : collapsed ? (
 						<UpOutlined
-							className={clsx('transition-colors', isMatchTo ? 'c-white' : 'c-gray6')}
+							className={clsx(
+								'transition-colors',
+								active ? (hasChildren ? 'c-geekblue6' : 'c-white') : 'c-gray6',
+							)}
 						/>
 					) : (
 						<DownOutlined
-							className={clsx('transition-colors', isMatchTo ? 'c-white' : 'c-gray6')}
+							className={clsx(
+								'transition-colors',
+								active ? (hasChildren ? 'c-geekblue6' : 'c-white') : 'c-gray6',
+							)}
 						/>
 					))}
 			</Item>
@@ -178,40 +139,119 @@ function SidebarItem({
 				<div
 					ref={childrenWrapRef}
 					className={clsx(
-						'pl-16 overflow-hidden rd-8 pt-8',
+						'overflow-hidden rd-8 pt-8',
 						!isMouseEnter && sidebarCollapsed && 'hidden',
-						childrenClassName,
 					)}
 					style={sidebarDefaultChildrenStyle}
 				>
-					{children}
+					{item.children!.map(e => (
+						<SidebarItem
+							key={e.key || e.path}
+							item={e}
+							sidebarCollapsed={sidebarCollapsed}
+							isMouseEnter={isMouseEnter}
+							level={level + 1}
+						/>
+					))}
 				</div>
 			) : (
 				<div className={'pt-8'} />
 			)}
-		</sidebarItemContext.Provider>
+		</div>
 	)
 }
 
-type SidebarContext = {
-	collapsed: boolean
-	isMouseEnter: boolean
-	pageRoute: PageRoutes.PageRoute<PageMeta> | null
+// 發送消息給當事人與其老媽
+function recursiveEmitActive(
+	path: string,
+	meta: PageMeta | undefined,
+	menuList: Menu[],
+	typeList: string[] = [],
+) {
+	for (let i = 0; i < menuList.length; i++) {
+		const menu = menuList[i]
+		const type = (menu.key || menu.path) as string
+
+		if (path === type || meta?.sideType === type) {
+			for (let j = 0; j < typeList.length; j++) {
+				sidebarEmitter.emit(typeList[j], true)
+			}
+			sidebarEmitter.emit(type, true)
+			return true
+		} else if (menu.children?.length) {
+			typeList.push(type)
+			const isFind = recursiveEmitActive(path, meta, menu.children, typeList)
+			if (isFind) return true
+		}
+	}
+
+	return false
 }
-const sidebarContext = createContext(null as unknown as SidebarContext)
+
+// 清空所有 menu 的 active 狀態
+function recursiveEmitAllClear(menuList: Menu[]) {
+	for (let i = 0; i < menuList.length; i++) {
+		const menu = menuList[i]
+		sidebarEmitter.emit((menu.key || menu.path) as string, false)
+		if (menu.children?.length) {
+			recursiveEmitAllClear(menu.children)
+		}
+	}
+}
 
 export function Sidebar() {
 	const sidebarCollapsed = $sidebarCollapsed.use
-	const pageRoute = usePageRoute()
+	const breakpoint = $breakpoint.use
+	const isEqualsBreakpointXl = breakpoint <= Breakpoint.xl
+	const isEqualsBreakpointMd = breakpoint <= Breakpoint.md
+	const sideCollapsed = isEqualsBreakpointMd ? false : isEqualsBreakpointXl || sidebarCollapsed
 	const [isMouseEnter, setIsMouseEnter] = useState(false)
-	const self: SidebarContext = {
-		collapsed: sidebarCollapsed,
-		isMouseEnter,
-		pageRoute,
-	}
-	const spaceStyle = {
-		width: sidebarCollapsed && !isMouseEnter ? sidebarCollapsedWidth : sidebarExpandWidth,
-	}
+	const pageRoute = usePageRoute()
+	const menuList: Menu[] = useMemo(
+		() => [
+			{
+				path: '/home',
+				icon: HomeOutlined,
+				label: 'homePage',
+			},
+			{
+				key: 'other',
+				icon: SettingOutlined,
+				label: 'other' as any,
+				children: [
+					{
+						key: 'casd',
+						path: '/home',
+						label: 'homePage',
+					},
+					{
+						key: 'aaa',
+						path: '/other/test',
+						label: 'test' as any,
+					},
+					{
+						key: 'other2',
+						label: 'other2' as any,
+						children: [
+							{
+								path: '/other/test',
+								label: 'test2' as any,
+							},
+						],
+					},
+				],
+			},
+		],
+		[],
+	)
+
+	useEffect(() => {
+		const { path, meta } = pageRoute || {}
+		if (path) {
+			recursiveEmitAllClear(menuList)
+			recursiveEmitActive(path, meta, menuList)
+		}
+	}, [menuList, pageRoute?.path])
 
 	function onMouseEnter() {
 		setIsMouseEnter(true)
@@ -222,45 +262,70 @@ export function Sidebar() {
 	}
 
 	return (
-		<sidebarContext.Provider value={self}>
+		<>
 			<div
 				className={
-					'fixed left-0 top-0 h-full bg-white b-r-1 b-solid b-light-gray overflow-auto ant-menu-width-transition'
+					'fixed left-0 bottom-0 h-full bg-white b-r-1 b-solid b-light-gray overflow-auto ant-menu-width-transition z-1 <md:(ant-menu-transform-transition pt-12)'
 				}
-				onMouseEnter={onMouseEnter}
-				onMouseLeave={onMouseLeave}
-				style={spaceStyle}
+				onMouseEnter={isEqualsBreakpointMd ? undefined : onMouseEnter}
+				onMouseLeave={isEqualsBreakpointMd ? undefined : onMouseLeave}
+				style={{
+					width: sideCollapsed && !isMouseEnter ? sidebarCollapsedWidth : sidebarExpandWidth,
+					height: isEqualsBreakpointMd
+						? `calc(100% - ${document.querySelector('#layout-header')?.clientHeight}px)`
+						: undefined,
+					transform: isEqualsBreakpointMd
+						? sidebarCollapsed
+							? 'translateX(-100%)'
+							: 'translateX(0)'
+						: undefined,
+				}}
 			>
 				<div className="px-12">
-					<div
-						className={
-							'mt-8 mx-8 mb-18 c-gray9 font-bold text-20 overflow-hidden whitespace-nowrap'
-						}
-						onClick={() => $sidebarCollapsed(e => !e)}
-					>
-						{envConfig.title}
-					</div>
+					{isEqualsBreakpointMd ? null : (
+						<div className="flex items-center justify-between mt-8 mx-8 mb-18">
+							<div className={'c-gray9 font-bold text-20 overflow-hidden whitespace-nowrap'}>
+								{envConfig.title}
+							</div>
+							{isEqualsBreakpointXl
+								? null
+								: (sidebarCollapsed ? isMouseEnter : true) && (
+										<div
+											className={
+												'inline-flex items-center justify-center w-18 h-18 b-solid b-geekblue10 b-2 rd-1/2 cursor-pointer'
+											}
+											onClick={toggleSidebarCollapsed}
+										>
+											{!sidebarCollapsed && (
+												<div className={'w-6 h-6 b-solid b-geekblue10 b-2 rd-1/2'} />
+											)}
+										</div>
+									)}
+						</div>
+					)}
 
-					<SidebarItem Icon={HomeOutlined} content={'上上層'}>
-						<SidebarItem content={'首頁1'} to={'/home'} />
-						<SidebarItem content={'首頁2'} to={'/home'} />
-
-						<SidebarItem Icon={HomeOutlined} content={'上層'}>
-							<SidebarItem content={'首頁3'} to={'/home'} />
-							<SidebarItem content={'test1'} to={'/other/test'} />
-						</SidebarItem>
-					</SidebarItem>
-
-					<SidebarItem content={'首頁5'} to={'/home'} />
-					<SidebarItem content={'test2'} to={'/other/test'} />
-
-					<SidebarItem Icon={HomeOutlined} content={'上層'}>
-						<SidebarItem content={'首頁7'} to={'/home'} />
-						<SidebarItem content={'首頁8'} to={'/home'} />
-					</SidebarItem>
+					{useMemo(
+						() =>
+							menuList.map(e => (
+								<SidebarItem
+									key={e.key || e.path}
+									item={e}
+									sidebarCollapsed={sideCollapsed}
+									isMouseEnter={isMouseEnter}
+								/>
+							)),
+						[sideCollapsed, isMouseEnter],
+					)}
 				</div>
 			</div>
-			<div className={'ant-menu-width-transition'} style={spaceStyle} />
-		</sidebarContext.Provider>
+			{isEqualsBreakpointMd ? null : (
+				<div
+					className={'ant-menu-width-transition'}
+					style={{
+						width: sideCollapsed ? sidebarCollapsedWidth : sidebarExpandWidth,
+					}}
+				/>
+			)}
+		</>
 	)
 }
