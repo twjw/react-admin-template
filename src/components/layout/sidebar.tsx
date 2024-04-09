@@ -5,7 +5,6 @@ import { $breakpoint, $sidebarCollapsed } from '@/service/store/atoms/app.ts'
 import { DownOutlined, HomeOutlined, SettingOutlined, UpOutlined } from '@ant-design/icons'
 import { KeyofDictionary, t } from '~i18n'
 import clsx from 'clsx'
-import styles from '@/components/layout/styles.module.css'
 import mitt, { Handler } from 'mitt'
 import { usePageRoute } from '~page-routes'
 import { PageMeta } from '@/types/common'
@@ -94,7 +93,9 @@ function SidebarItem({ item, sidebarCollapsed, isMouseEnter, level = 1 }: Sideba
 					'flex items-center justify-center py-8 px-12 transition-colors rd-8',
 					hasChildren && 'cursor-pointer',
 					active && (hasChildren ? '' : 'bg-geekblue10'),
-					hasChildren ? styles.sidebarParentItem : styles.sidebarItem,
+					hasChildren
+						? 'hover:c-geekblue6 [&_*]:hover:c-geekblue6'
+						: 'hover:bg-geekblue10 [&_*]:hover:c-white',
 				)}
 				onClick={() => setCollapsed(e => !e)}
 				style={{ paddingLeft: level * 16 }}
