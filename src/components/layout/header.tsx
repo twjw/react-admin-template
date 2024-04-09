@@ -2,12 +2,10 @@ import { envConfig } from '~env-config'
 import { Locale, locale, t } from '~i18n'
 import { storage } from '@/service/store/storage.ts'
 import { Breakpoint, hookInstances } from '@/constants'
-import { usePageRoute } from '~page-routes'
 import { Popover, Select, Tooltip } from 'antd'
 import { $userProfile } from '@/service/store/atoms/user.ts'
 import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { localeDict, updateLocale } from '@/utils/locale.ts'
-import { Fragment, useMemo } from 'react'
 import { $breakpoint, $sidebarCollapsed } from '@/service/store/atoms/app.ts'
 import { toggleSidebarCollapsed } from '@/service/store/actions/app.ts'
 
@@ -84,41 +82,6 @@ function LangPopContent() {
 			)}
 		</Select>
 	)
-}
-
-function Breadcrumb() {
-	const ctx = usePageRoute()
-	const breadcrumbs = useMemo(() => {
-		if (!ctx?.meta) return []
-
-		const breadcrumbs: Breadcrumb[] = []
-
-		if (ctx.meta.homeBread) {
-			breadcrumbs.push({
-				path: '/home',
-				dict: 'homePage',
-			})
-		}
-
-		if (ctx.meta.breadcrumbs?.length) return breadcrumbs.concat(ctx.meta.breadcrumbs)
-
-		return breadcrumbs
-	}, [ctx?.path])
-
-	return breadcrumbs.map((e, i) => {
-		return (
-			<Fragment key={i}>
-				{i > 0 && <span className={'text-14 c-gray4 mx-4'}>/</span>}
-				{e.path == null ? (
-					<div className={'text-14 c-gray4'}>{t(e.dict)}</div>
-				) : (
-					<a className={'text-14 c-blue'} href={e.path}>
-						{t(e.dict)}
-					</a>
-				)}
-			</Fragment>
-		)
-	})
 }
 
 export { Header }
