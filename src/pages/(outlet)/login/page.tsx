@@ -45,24 +45,12 @@ function Page() {
 	}
 
 	return (
-		<div className={'w-full min-h-screen bg-geekblue1 flex-center relative p-24'}>
-			<div className="absolute left-0 top-0 w-1/2 h-full bg-geekblue2 <md:(w-full bg-geekblue2)" />
-			<div className="absolute right-0 top-0 w-1/2 h-full bg-geekblue10 <md:(hidden)" />
-			<div className="bg-white w-1024 max-w-full rd-16 flex relative shadow-xl <md:(w-320 p-24 rd-8)">
-				<div
-					className={
-						'px-24 py-48 w-1/2 flex-center flex-col b-r-1 b-r-geekblue1 b-solid <md:(hidden)'
-					}
-				>
-					<div
-						className={'font-900 text-60 text-center font-mono text-geekblue2 translate-y-16'}
-					>
-						WELCOME
-					</div>
-					<img src={'/login-human.png'} className={'max-w-full'} />
-				</div>
+		<div className={'w-full min-h-screen bg-geekblue1 flex-center relative'}>
+			<div className="absolute left-0 top-0 w-1/2 h-full bg-geekblue1" />
+			<div className="absolute right-0 top-0 w-1/2 h-full bg-geekblue10" />
+			<div className="bg-white w-768 min-h-screen max-w-full flex relative shadow-xl">
 				<Form
-					className={'w-1/2 flex-center flex-col <md:(w-full)'}
+					className={'w-full flex-center flex-col'}
 					layout="vertical"
 					name="login"
 					initialValues={
@@ -76,10 +64,10 @@ function Page() {
 					onFinish={onLogin}
 					autoComplete="off"
 				>
-					<div className="w-320 <md:(w-full)">
-						<div className={'mb-18 font-bold text-24 w-full text-left <md:(text-center)'}>
-							{t('login')}
-						</div>
+					<div className="w-90%">
+						<div className={'mb-18 font-bold text-24 w-full text-left'}>{envConfig.title}</div>
+
+						<div className={'mb-18 font-bold text-20 w-full text-left'}>{t('login')}</div>
 
 						<Form.Item<FieldType>
 							label={t('username')}
