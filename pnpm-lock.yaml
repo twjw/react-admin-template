@@ -47,7 +47,7 @@ specifiers:
   wtbx-enum: ^2.0.2
   wtbx-merge-env: ^1.0.1
   wtbx-react-atom: ^1.0.2
-  wtbx-type-safe-fetch: ^3.0.2
+  wtbx-type-safe-fetch: ^3.0.3
   wtbx-types: ^1.0.4
   wtbx-uno-preset-antd-colors-theme: ^1.0.3
   wtbx-uno-preset-rem-121: ^1.0.1
@@ -76,7 +76,7 @@ dependencies:
   wtbx-create-value-storage: 1.0.1
   wtbx-enum: 2.0.2
   wtbx-react-atom: 1.0.2_react@18.2.0
-  wtbx-type-safe-fetch: 3.0.2
+  wtbx-type-safe-fetch: 3.0.3
 
 devDependencies:
   '@ant-design/colors': 7.0.2
@@ -4606,8 +4606,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /wtbx-type-safe-fetch/3.0.2:
-    resolution: {integrity: sha512-b3n2hNZe1In2rYp7Cjx0g2gscgKPYqRbAJyLJ3EE8rZ3m2wIuk8N0caqy6EeXd8ST1lTWzrwerEkc67SYF1/Gw==}
+  /wtbx-type-safe-fetch/3.0.3:
+    resolution: {integrity: sha512-w7KdNENFpMjKGHchTEpUQ5jTsyeZVd4Nrf7Cr+RXeuoNasCpRF13sL2eblkVqr39oxg/kzSxoLJR0duNj3/sYA==}
     dev: false
 
   /wtbx-types/1.0.4:
