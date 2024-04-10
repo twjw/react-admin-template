@@ -180,7 +180,6 @@ function recursiveEmitActive(
 				sidebarEmitter.emit(_typeList[j], true)
 			}
 			sidebarEmitter.emit(type, true)
-			console.log(_typeList, type, 123, path)
 			return true
 		} else if (menu.children?.length) {
 			_typeList.push(type)
