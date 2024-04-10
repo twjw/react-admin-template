@@ -44,12 +44,13 @@ export default async ({ mode, command }: { mode: EnvMode; command: 'serve' | 'bu
 				inject: {
 					data: {
 						title: envConfig.title,
+						version: envConfig.version,
 						htmlFontSize: `${BASE_FONT_SIZE}px`,
 					},
 				},
 			}),
 			mockApis(),
-			injectEnv({ env: clientEnv, propNames: ['mode', 'title', 'vite'] }),
+			injectEnv({ env: clientEnv, propNames: ['mode', 'version', 'title', 'vite'] }),
 			autoAlias(),
 			buildDropLog(),
 			pageRoutes<PageMeta>({
