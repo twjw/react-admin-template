@@ -106,6 +106,7 @@ function SidebarItem({ item, sidebarCollapsed, isMouseEnter, level = 1 }: Sideba
 						className={clsx(
 							'transition-colors text-14',
 							active ? (hasChildren ? 'c-geekblue6' : 'c-white') : 'c-gray6',
+							sidebarCollapsed && 'py-6',
 						)}
 					/>
 				)}
