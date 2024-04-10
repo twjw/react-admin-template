@@ -13,7 +13,7 @@ function Header() {
 	const sidebarCollapsed = $sidebarCollapsed.use
 	const breakpoint = $breakpoint.use
 	const userProfile = $userProfile.use
-	const isEqualsBreakpointMd = breakpoint <= Breakpoint.md
+	const lessEqualsMd = breakpoint <= Breakpoint.md
 
 	function onLogout() {
 		storage.token.setItem(null)
@@ -23,7 +23,7 @@ function Header() {
 
 	return (
 		<>
-			{isEqualsBreakpointMd && !sidebarCollapsed ? (
+			{lessEqualsMd && !sidebarCollapsed ? (
 				<div
 					className="z-1 fixed left-0 top-0 right-0 bottom-0 bg-[rgba(0,0,0,0.7)]"
 					onClick={toggleSidebarCollapsed}
@@ -35,7 +35,7 @@ function Header() {
 					'w-full flex items-center py-8 px-16 bg-white shadow-md sticky top-0 right-0 z-1 <md:(p-0 pr-12)'
 				}
 			>
-				{isEqualsBreakpointMd ? (
+				{lessEqualsMd ? (
 					<div className={'px-12 py-8 cursor-pointer'} onClick={toggleSidebarCollapsed}>
 						{sidebarCollapsed ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
 					</div>

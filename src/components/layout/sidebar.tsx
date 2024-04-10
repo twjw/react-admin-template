@@ -167,21 +167,23 @@ function recursiveEmitActive(
 	path: string,
 	meta: PageMeta | undefined,
 	menuList: Menu[],
-	typeList: string[] = [],
+	typeList: string[] | undefined = undefined,
 ) {
 	for (let i = 0; i < menuList.length; i++) {
 		const menu = menuList[i]
 		const type = (menu.key || menu.path) as string
+		const _typeList = typeList === undefined ? [] : typeList
 
 		if (path === type || meta?.sideType === type) {
-			for (let j = 0; j < typeList.length; j++) {
-				sidebarEmitter.emit(typeList[j], true)
+			for (let j = 0; j < _typeList.length; j++) {
+				sidebarEmitter.emit(_typeList[j], true)
 			}
 			sidebarEmitter.emit(type, true)
+			console.log(_typeList, type, 123, path)
 			return true
 		} else if (menu.children?.length) {
-			typeList.push(type)
-			const isFind = recursiveEmitActive(path, meta, menu.children, typeList)
+			_typeList.push(type)
+			const isFind = recursiveEmitActive(path, meta, menu.children, _typeList)
 			if (isFind) return true
 		}
 	}
@@ -203,9 +205,9 @@ function recursiveEmitAllClear(menuList: Menu[]) {
 export function Sidebar() {
 	const sidebarCollapsed = $sidebarCollapsed.use
 	const breakpoint = $breakpoint.use
-	const isEqualsBreakpointXl = breakpoint <= Breakpoint.xl
-	const isEqualsBreakpointMd = breakpoint <= Breakpoint.md
-	const sideCollapsed = isEqualsBreakpointMd ? false : isEqualsBreakpointXl || sidebarCollapsed
+	const lessEqualsXl = breakpoint <= Breakpoint.xl
+	const lessEqualsMd = breakpoint <= Breakpoint.md
+	const sideCollapsed = lessEqualsMd ? false : lessEqualsXl || sidebarCollapsed
 	const [isMouseEnter, setIsMouseEnter] = useState(false)
 	const pageRoute = usePageRoute()
 	const menuList: Menu[] = useMemo(
@@ -268,14 +270,14 @@ export function Sidebar() {
 				className={
 					'fixed left-0 bottom-0 h-full bg-white b-r-1 b-solid b-light-gray overflow-auto ant-menu-width-transition z-1 <md:(ant-menu-transform-transition pt-12)'
 				}
-				onMouseEnter={isEqualsBreakpointMd ? undefined : onMouseEnter}
-				onMouseLeave={isEqualsBreakpointMd ? undefined : onMouseLeave}
+				onMouseEnter={lessEqualsMd ? undefined : onMouseEnter}
+				onMouseLeave={lessEqualsMd ? undefined : onMouseLeave}
 				style={{
 					width: sideCollapsed && !isMouseEnter ? sidebarCollapsedWidth : sidebarExpandWidth,
-					height: isEqualsBreakpointMd
+					height: lessEqualsMd
 						? `calc(100% - ${document.querySelector('#layout-header')?.clientHeight}px)`
 						: undefined,
-					transform: isEqualsBreakpointMd
+					transform: lessEqualsMd
 						? sidebarCollapsed
 							? 'translateX(-100%)'
 							: 'translateX(0)'
@@ -283,12 +285,12 @@ export function Sidebar() {
 				}}
 			>
 				<div className="px-12">
-					{isEqualsBreakpointMd ? null : (
+					{lessEqualsMd ? null : (
 						<div className="flex items-center justify-between mt-8 mx-8 mb-18">
 							<div className={'c-gray9 font-bold text-20 overflow-hidden whitespace-nowrap'}>
 								{envConfig.title}
 							</div>
-							{isEqualsBreakpointXl
+							{lessEqualsXl
 								? null
 								: (sidebarCollapsed ? isMouseEnter : true) && (
 										<div
@@ -319,7 +321,7 @@ export function Sidebar() {
 					)}
 				</div>
 			</div>
-			{isEqualsBreakpointMd ? null : (
+			{lessEqualsMd ? null : (
 				<div
 					className={'ant-menu-width-transition'}
 					style={{
