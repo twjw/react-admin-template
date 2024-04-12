@@ -7,7 +7,9 @@ import { $userProfile } from '@/service/store/atoms/user.ts'
 import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { localeDict, updateLocale } from '@/utils/locale.ts'
 import { $breakpoint, $sidebarCollapsed } from '@/service/store/atoms/app.ts'
-import { toggleSidebarCollapsed } from '@/service/store/actions/app.ts'
+import { closeSidebar, toggleSidebar } from '@/service/store/actions/app.ts'
+import { useState } from 'react'
+import { animated, useSpring } from '@react-spring/web'
 
 function Header() {
 	const sidebarCollapsed = $sidebarCollapsed.use
@@ -23,12 +25,7 @@ function Header() {
 
 	return (
 		<>
-			{lessEqualsMd && !sidebarCollapsed ? (
-				<div
-					className="z-1 fixed left-0 top-0 right-0 bottom-0 bg-[rgba(0,0,0,0.7)]"
-					onClick={toggleSidebarCollapsed}
-				/>
-			) : null}
+			{lessEqualsMd && <SidebarMask />}
 			<div
 				id={'layout-header'}
 				className={
@@ -36,7 +33,7 @@ function Header() {
 				}
 			>
 				{lessEqualsMd ? (
-					<div className={'px-12 py-8 cursor-pointer'} onClick={toggleSidebarCollapsed}>
+					<div className={'px-12 py-8 cursor-pointer'} onClick={toggleSidebar}>
 						{sidebarCollapsed ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
 					</div>
 				) : null}
@@ -65,6 +62,37 @@ function Header() {
 				</div>
 			</div>
 		</>
+	)
+}
+
+function SidebarMask() {
+	const sidebarCollapsed = $sidebarCollapsed.use
+	const [show, setShow] = useState(sidebarCollapsed)
+	const [props, api] = useSpring(
+		() => ({
+			from: { opacity: sidebarCollapsed ? 1 : 0 },
+			to: { opacity: sidebarCollapsed ? 0 : 1 },
+			config: {
+				duration: 300,
+			},
+			onStart() {
+				if (!sidebarCollapsed) setShow(true)
+			},
+			onRest() {
+				setShow(!sidebarCollapsed)
+			},
+		}),
+		[sidebarCollapsed],
+	)
+
+	return (
+		show && (
+			<animated.div
+				className="z-1 fixed left-0 top-0 right-0 bottom-0 bg-[rgba(0,0,0,0.7)]"
+				onClick={closeSidebar}
+				style={props}
+			/>
+		)
 	)
 }
 

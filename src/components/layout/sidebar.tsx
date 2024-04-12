@@ -9,7 +9,7 @@ import mitt, { Handler } from 'mitt'
 import { usePageRoute } from '~page-routes'
 import { PageMeta } from '@/types/common'
 import { Link } from 'react-router-dom'
-import { toggleSidebarCollapsed } from '@/service/store/actions/app.ts'
+import { toggleSidebar } from '@/service/store/actions/app.ts'
 
 type Menu = {
 	key?: string // key 沒填 path 來補，兩個要填一個，且要唯一
@@ -297,7 +297,7 @@ export function Sidebar() {
 											className={
 												'inline-flex items-center justify-center w-18 h-18 b-solid b-geekblue10 b-2 rd-1/2 cursor-pointer'
 											}
-											onClick={toggleSidebarCollapsed}
+											onClick={toggleSidebar}
 										>
 											{!sidebarCollapsed && (
 												<div className={'w-6 h-6 b-solid b-geekblue10 b-2 rd-1/2'} />
