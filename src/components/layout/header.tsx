@@ -32,7 +32,7 @@ function Header() {
 			<div
 				id={'layout-header'}
 				className={
-					'w-full flex items-center py-8 px-16 bg-white shadow-md sticky top-0 right-0 z-1 <md:(p-0 pr-12)'
+					'w-full flex items-center py-8 px-16 bg-white shadow-md sticky top-0 right-0 z-1 <md:(p-0)'
 				}
 			>
 				{lessEqualsMd ? (
