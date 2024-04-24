@@ -29,6 +29,7 @@ specifiers:
   lint-staged: ^15.2.2
   lodash-es: ^4.17.21
   mitt: ^3.0.1
+  polished: ^4.3.1
   prettier: ^3.2.5
   query-string: ^8.2.0
   rc-field-form: ^1.43.0
@@ -68,6 +69,7 @@ dependencies:
   immer: 10.0.4
   lodash-es: 4.17.21
   mitt: 3.0.1
+  polished: 4.3.1
   query-string: 8.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -3392,6 +3394,13 @@ packages:
       mlly: 1.6.1
       pathe: 1.1.2
     dev: true
+
+  /polished/4.3.1:
+    resolution: {integrity: sha512-OBatVyC/N7SCW/FaDHrSd+vn0o5cS855TOmYi4OkdWUMSJCET/xip//ch8xGUvtr3i44X9LVyWwQlRMTN3pwSA==}
+    engines: {node: '>=10'}
+    dependencies:
+      '@babel/runtime': 7.24.1
+    dev: false
 
   /postcss/8.4.38:
     resolution: {integrity: sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==}
