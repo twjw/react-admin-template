@@ -52,6 +52,7 @@
     "@vitejs/plugin-react-swc": "^3.6.0",
     "body": "^5.1.0",
     "cac": "^6.7.14",
+    "esbuild": "^0.21.2",
     "eslint": "^8.57.0",
     "eslint-plugin-unused-imports": "^3.1.0",
     "husky": "^8.0.3",
@@ -65,7 +66,7 @@
     "vite-plugin-checker": "^0.6.4",
     "vite-plugin-html": "^3.2.2",
     "vite-plugin-svgr": "^4.2.0",
-    "wtbx-merge-env": "^1.0.1",
+    "wtbx-merge-env": "^2.0.1",
     "wtbx-types": "^1.0.4",
     "wtbx-uno-preset-antd-colors-theme": "^1.0.3",
     "wtbx-uno-preset-rem-121": "^1.0.1",
@@ -74,7 +75,7 @@
     "wtbx-vite-build-drop-log": "^1.0.1",
     "wtbx-vite-inject-env": "^1.0.2",
     "wtbx-vite-mock-apis": "^1.2.1",
-    "wtbx-vite-react-i18n": "^1.0.3",
+    "wtbx-vite-react-i18n": "^1.1.0",
     "wtbx-vite-react-page-routes": "^2.0.6"
   }
 }
