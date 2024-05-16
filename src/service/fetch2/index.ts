@@ -1,5 +1,4 @@
 import { tsFetch, TsFetchTemplate } from 'wtbx-type-safe-fetch'
-import { Apis as UserApis } from '@/service/fetch2/api-types/user.ts'
 import { ApiResponse, MyListenerRequestInit, MyRequestInit } from '@/service/fetch2/type.ts'
 import { envConfig } from '~env-config'
 import { TsFetchToolMock } from 'wtbx-type-safe-fetch/tools/mock'
@@ -16,8 +15,12 @@ import { passAuthRequest, checkApiPermission } from '@/service/fetch2/watch-tool
 
 const isLocal = envConfig.vite.isLocal
 
-const fetch2 = tsFetch as unknown as TsFetchTemplate<UserApis, MyRequestInit>
+const fetch2 = tsFetch as unknown as TsFetchTemplate<
+	import('@/service/fetch2/api-types/user.ts').Apis,
+	MyRequestInit
+>
 
+// TODO 之後優化為裸奔流
 const mock = TsFetchToolMock()
 const methodUrl = TsFetchToolMethodUrl()
 const pathParamsUrl = TsFetchToolPathParamsUrl()
