@@ -1,0 +1,42 @@
+{
+  "login": {
+    "繁體中文(zh_TW)": "登入",
+    "英文(en)": "Login"
+  },
+  "logout": {
+    "繁體中文(zh_TW)": "登出",
+    "英文(en)": "Logout"
+  },
+  "username": {
+    "繁體中文(zh_TW)": "帳號",
+    "英文(en)": "Username"
+  },
+  "password": {
+    "繁體中文(zh_TW)": "密碼",
+    "英文(en)": "Password"
+  },
+  "plzEnterUsername": {
+    "繁體中文(zh_TW)": "請輸入帳號",
+    "英文(en)": "Please enter username"
+  },
+  "plzEnterPassword": {
+    "繁體中文(zh_TW)": "請輸入密碼",
+    "英文(en)": "Please enter password"
+  },
+  "loginSucceedRedirect": {
+    "繁體中文(zh_TW)": "登入成功，正為您跳轉頁面",
+    "英文(en)": "Login successful, redirecting your page"
+  },
+  "succeed": {
+    "繁體中文(zh_TW)": "成功",
+    "英文(en)": "Successful"
+  },
+  "psucceed": {
+    "繁體中文(zh_TW)": "{0}成功",
+    "英文(en)": "{0} successful"
+  },
+  "homePage": {
+    "繁體中文(zh_TW)": "首頁",
+    "英文(en)": "Home"
+  }
+}

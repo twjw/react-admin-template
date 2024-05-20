@@ -26,3 +26,4 @@ dist-ssr
 # Custom
 package-lock.json
 yarn.lock
+**/*/assets/locales/*.ts
