@@ -79,9 +79,7 @@ export default async ({ mode, command }: { mode: EnvMode; command: 'serve' | 'bu
 			}),
 			UnoCSS(),
 			checker({
-				typescript: {
-					buildMode: isBuild,
-				},
+				typescript: true,
 			}),
 		],
 		server: {
