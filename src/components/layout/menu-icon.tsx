@@ -8,7 +8,7 @@ export type MenuProps = {
 }
 
 export function MenuIcon({ className, collapsed }: MenuProps) {
-	const sidebarCollapsed = $sidebarCollapsed.use
+	const sidebarCollapsed = $sidebarCollapsed.use()
 	const _collapsed = collapsed === undefined ? sidebarCollapsed : collapsed
 	const Component = _collapsed ? MenuUnfoldOutlined : MenuFoldOutlined
 	return (

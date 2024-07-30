@@ -14,7 +14,7 @@ type CommonProps = {
 function RouteContent({ path, children }: CommonProps) {
 	const ctx = usePageRoute()
 	const metaPrivate = ctx?.meta?.private
-	const userProfile = $userProfile.use
+	const userProfile = $userProfile.use()
 	const hasPermission = metaPrivate ? userProfile != null : true
 
 	useEffect(updateProfile, [userProfile, metaPrivate])

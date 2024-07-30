@@ -12,9 +12,9 @@ import { useState } from 'react'
 import { animated, useSpring } from '@react-spring/web'
 
 function Header() {
-	const sidebarCollapsed = $sidebarCollapsed.use
-	const breakpoint = $breakpoint.use
-	const userProfile = $userProfile.use
+	const sidebarCollapsed = $sidebarCollapsed.use()
+	const breakpoint = $breakpoint.use()
+	const userProfile = $userProfile.use()
 	const lessEqualsMd = breakpoint <= Breakpoint.md
 
 	function onLogout() {
@@ -66,7 +66,7 @@ function Header() {
 }
 
 function SidebarMask() {
-	const sidebarCollapsed = $sidebarCollapsed.use
+	const sidebarCollapsed = $sidebarCollapsed.use()
 	const [show, setShow] = useState(sidebarCollapsed)
 	const [props, api] = useSpring(
 		() => ({

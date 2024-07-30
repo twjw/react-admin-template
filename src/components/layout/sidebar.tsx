@@ -203,8 +203,8 @@ function recursiveEmitAllClear(menuList: Menu[]) {
 }
 
 export function Sidebar() {
-	const sidebarCollapsed = $sidebarCollapsed.use
-	const breakpoint = $breakpoint.use
+	const sidebarCollapsed = $sidebarCollapsed.use()
+	const breakpoint = $breakpoint.use()
 	const lessEqualsXl = breakpoint <= Breakpoint.xl
 	const lessEqualsMd = breakpoint <= Breakpoint.md
 	const sideCollapsed = lessEqualsMd ? false : lessEqualsXl || sidebarCollapsed
