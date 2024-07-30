@@ -38,7 +38,7 @@ specifiers:
   react: ^18.2.0
   react-dom: ^18.2.0
   react-error-boundary: ^4.0.13
-  react-router-dom: ^6.22.3
+  react-router-dom: 6.3.0
   typescript: ^5.4.3
   unocss: 0.58.2
   vite: ^5.2.6
@@ -75,7 +75,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-error-boundary: 4.0.13_react@18.2.0
-  react-router-dom: 6.22.3_biqbaboplfbrettd7655fr4n2y
+  react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
   wtbx-create-value-storage: 1.0.1
   wtbx-enum: 2.0.2
   wtbx-react-atom: 1.1.0_react@18.2.0
@@ -122,7 +122,7 @@ devDependencies:
   wtbx-vite-inject-env: 1.0.2_vite@5.2.6
   wtbx-vite-mock-apis: 1.2.1_ctut7etmhyhv2jg2n66iluckla
   wtbx-vite-react-i18n: 1.1.0_react@18.2.0+vite@5.2.6
-  wtbx-vite-react-page-routes: 2.0.6_ul3psi4onfuhqn6z4y6hhkanp4
+  wtbx-vite-react-page-routes: 2.0.6_fjaahbbzeubc4sgjo4mdfzxcwi
 
 packages:
 
@@ -1225,6 +1225,7 @@ packages:
   /@remix-run/router/1.15.3:
     resolution: {integrity: sha512-Oy8rmScVrVxWZVOpEF57ovlnhpZ8CCPlnIIumVcV9nFdiSIrus99+Lw78ekXyGvVDlIsFJbSfmSovJUhCWYV3w==}
     engines: {node: '>=14.0.0'}
+    dev: true
 
   /@rollup/pluginutils/4.2.1:
     resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
@@ -3037,6 +3038,11 @@ packages:
     hasBin: true
     dev: true
 
+  /history/5.3.0:
+    resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
+    dependencies:
+      '@babel/runtime': 7.24.1
+
   /html-minifier-terser/6.1.0:
     resolution: {integrity: sha512-YXxSlJBZTP7RS3tWnQw74ooKa6L9b9i9QYXY21eUEvhZ3u9XLfv6OnFsQq6RxkhHygsaUMvYsZRV5rU/OVNZxw==}
     engines: {node: '>=12'}
@@ -4207,25 +4213,23 @@ packages:
   /react-is/18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
 
-  /react-router-dom/6.22.3_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-7ZILI7HjcE+p31oQvwbokjk6OA/bnFxrhJ19n82Ex9Ph8fNAq+Hm/7KchpMGlTgWhUxRHMMCut+vEtNpWpowKw==}
-    engines: {node: '>=14.0.0'}
+  /react-router-dom/6.3.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-uaJj7LKytRxZNQV8+RbzJWnJ8K2nPsOOEuX7aQstlMZKQT0164C+X2w6bnkqU3sjtLvpd5ojrezAyfZ1+0sStw==}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
-      '@remix-run/router': 1.15.3
+      history: 5.3.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-router: 6.22.3_react@18.2.0
+      react-router: 6.3.0_react@18.2.0
 
-  /react-router/6.22.3_react@18.2.0:
-    resolution: {integrity: sha512-dr2eb3Mj5zK2YISHK++foM9w4eBnO23eKnZEDs7c880P6oKbrjz/Svg9+nxqtHQK+oMW4OtjZca0RqPglXxguQ==}
-    engines: {node: '>=14.0.0'}
+  /react-router/6.3.0_react@18.2.0:
+    resolution: {integrity: sha512-7Wh1DzVQ+tlFjkeo+ujvjSqSJmkt1+8JO+T5xklPlgrh70y7ogx75ODRW0ThWhY7S+6yEDks8TYrtQe/aoboBQ==}
     peerDependencies:
       react: '>=16.8'
     dependencies:
-      '@remix-run/router': 1.15.3
+      history: 5.3.0
       react: 18.2.0
 
   /react/18.2.0:
@@ -4941,7 +4945,7 @@ packages:
       vite: 5.2.6_@types+node@20.11.30
     dev: true
 
-  /wtbx-vite-react-page-routes/2.0.6_ul3psi4onfuhqn6z4y6hhkanp4:
+  /wtbx-vite-react-page-routes/2.0.6_fjaahbbzeubc4sgjo4mdfzxcwi:
     resolution: {integrity: sha512-bbRX7y20v3qOIvHT2r321Sxl+OV2qm1R56I6VNppKuWb9hcwEE9LSxAIjejK6yHm8PtSdZWd9O4vuX7tZhjchQ==}
     peerDependencies:
       react: '>=18'
@@ -4951,7 +4955,7 @@ packages:
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-router-dom: 6.22.3_biqbaboplfbrettd7655fr4n2y
+      react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
       vite: 5.2.6_@types+node@20.11.30
     dev: true
 
