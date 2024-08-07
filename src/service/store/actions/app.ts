@@ -1,9 +1,9 @@
-import { $sidebarCollapsed } from '@/service/store/atoms/app.ts'
+import { sidebarCollapsedAtom } from '@/service/store/atoms/app.ts'
 
 export function toggleSidebar() {
-	$sidebarCollapsed(e => !e)
+	sidebarCollapsedAtom(e => !e)
 }
 
 export function closeSidebar() {
-	$sidebarCollapsed(true)
+	sidebarCollapsedAtom(true)
 }

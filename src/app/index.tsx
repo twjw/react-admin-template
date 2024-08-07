@@ -8,7 +8,7 @@ import { storage } from '@/service/store/storage.ts'
 import { Locale } from 'antd/es/locale'
 import { updateLocale } from '@/utils/locale.ts'
 import { useRwd } from '@/components/rwd-element'
-import { $breakpoint } from '@/service/store/atoms/app.ts'
+import { breakpointAtom } from '@/service/store/atoms/app.ts'
 
 function App() {
 	return (
@@ -27,7 +27,7 @@ function BreakpointListener() {
 	const [breakpoint] = useRwd(breakpoints as unknown as number[])
 
 	useEffect(() => {
-		$breakpoint(breakpoint)
+		breakpointAtom(breakpoint)
 	}, [breakpoint])
 
 	return null

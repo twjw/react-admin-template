@@ -1,7 +1,7 @@
 import { Breakpoint, sidebarCollapsedWidth, sidebarExpandWidth } from '@/constants'
 import { ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react'
 import { envConfig } from '~env-config'
-import { $breakpoint, $sidebarCollapsed } from '@/service/store/atoms/app.ts'
+import { breakpointAtom, sidebarCollapsedAtom } from '@/service/store/atoms/app.ts'
 import { DownOutlined, HomeOutlined, SettingOutlined, UpOutlined } from '@ant-design/icons'
 import { KeyofDictionary, t } from '~i18n'
 import clsx from 'clsx'
@@ -203,8 +203,8 @@ function recursiveEmitAllClear(menuList: Menu[]) {
 }
 
 export function Sidebar() {
-	const sidebarCollapsed = $sidebarCollapsed.use()
-	const breakpoint = $breakpoint.use()
+	const sidebarCollapsed = sidebarCollapsedAtom.use()
+	const breakpoint = breakpointAtom.use()
 	const lessEqualsXl = breakpoint <= Breakpoint.xl
 	const lessEqualsMd = breakpoint <= Breakpoint.md
 	const sideCollapsed = lessEqualsMd ? false : lessEqualsXl || sidebarCollapsed

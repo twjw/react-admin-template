@@ -1,7 +1,7 @@
-import { $userProfile } from '@/service/store/atoms/user.ts'
+import { userProfileAtom } from '@/service/store/atoms/user.ts'
 
 function Page() {
-	const userProfile = $userProfile.use()
+	const userProfile = userProfileAtom.use()
 
 	return <div>{userProfile?.name}</div>
 }

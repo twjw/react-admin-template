@@ -1,7 +1,7 @@
 import { ErrorBoundary } from '@/components/error-boundary.tsx'
 import { ReactNode, Suspense, useEffect } from 'react'
 import { usePageRoute } from '~page-routes'
-import { $userProfile } from '@/service/store/atoms/user.ts'
+import { userProfileAtom } from '@/service/store/atoms/user.ts'
 import { getUserProfile } from '@/service/fetch2/helper/user.ts'
 import { LazyError404 } from '@/components/pages/404.tsx'
 import { storage } from '@/service/store/storage.ts'
@@ -14,7 +14,7 @@ type CommonProps = {
 function RouteContent({ path, children }: CommonProps) {
 	const ctx = usePageRoute()
 	const metaPrivate = ctx?.meta?.private
-	const userProfile = $userProfile.use()
+	const userProfile = userProfileAtom.use()
 	const hasPermission = metaPrivate ? userProfile != null : true
 
 	useEffect(updateProfile, [userProfile, metaPrivate])

@@ -3,18 +3,18 @@ import { Locale, locale, t } from '~i18n'
 import { storage } from '@/service/store/storage.ts'
 import { Breakpoint, hookInstances } from '@/constants'
 import { Popover, Select, Tooltip } from 'antd'
-import { $userProfile } from '@/service/store/atoms/user.ts'
+import { userProfileAtom } from '@/service/store/atoms/user.ts'
 import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { localeDict, updateLocale } from '@/utils/locale.ts'
-import { $breakpoint, $sidebarCollapsed } from '@/service/store/atoms/app.ts'
+import { breakpointAtom, sidebarCollapsedAtom } from '@/service/store/atoms/app.ts'
 import { closeSidebar, toggleSidebar } from '@/service/store/actions/app.ts'
 import { useState } from 'react'
 import { animated, useSpring } from '@react-spring/web'
 
 function Header() {
-	const sidebarCollapsed = $sidebarCollapsed.use()
-	const breakpoint = $breakpoint.use()
-	const userProfile = $userProfile.use()
+	const sidebarCollapsed = sidebarCollapsedAtom.use()
+	const breakpoint = breakpointAtom.use()
+	const userProfile = userProfileAtom.use()
 	const lessEqualsMd = breakpoint <= Breakpoint.md
 
 	function onLogout() {
@@ -66,7 +66,7 @@ function Header() {
 }
 
 function SidebarMask() {
-	const sidebarCollapsed = $sidebarCollapsed.use()
+	const sidebarCollapsed = sidebarCollapsedAtom.use()
 	const [show, setShow] = useState(sidebarCollapsed)
 	const [props, api] = useSpring(
 		() => ({
