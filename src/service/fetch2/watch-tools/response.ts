@@ -1,6 +1,9 @@
 import { ApiResponse, MyListenerRequestInit } from '@/service/fetch2/type.ts'
 import { hookInstances } from '@/constants'
 
+/**
+ * @desc 自動將 Response 轉換成值(like: res.json())，並且統一響應格式
+ */
 export async function commonApiResponse(req: MyListenerRequestInit, res: Response) {
 	const result = await res[req.responseType || 'json']()
 	const success = result?.data?.success || res.status === 200

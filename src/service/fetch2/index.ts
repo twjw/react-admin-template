@@ -20,11 +20,17 @@ const fetch2 = tsFetch as unknown as TsFetchTemplate<
 	MyRequestInit
 >
 
+// 開發運行環境下支持 mock api
 const toolMock = TsFetchToolMock()
+// 將路徑的方法轉換成 method
 const toolMethodUrl = TsFetchToolMethodUrl()
+// 將路徑參數轉換成匹配的 pathParams key-value
 const toolPathParamsUrl = TsFetchToolPathParamsUrl()
+// 將 params 轉成 qs, body 轉成字串
 const toolParamsAndBodyParser = TsFetchToolParamsAndBodyParser()
+// 開發運行環境下 log 響應值
 const toolLog = TsFetchToolLog<Error, MyListenerRequestInit, ApiResponse<any>>()
+// 合併相同請求
 const toolMergeSameRequest = TsFetchToolMergeSameRequest<
 	Error,
 	MyListenerRequestInit,
@@ -32,15 +38,14 @@ const toolMergeSameRequest = TsFetchToolMergeSameRequest<
 >()
 
 fetch2.watch.request<MyListenerRequestInit>(req => {
-	if (isLocal) toolMock.transform(req) // 開發運行環境下支持 mock api
+	if (isLocal) toolMock.transform(req)
 
 	req.originUrl = req.url
-	toolMergeSameRequest.defer(req.originUrl, req) // 合併相同請求
-
-	toolMethodUrl.transform(req) // 將路徑的方法轉換成 method
-	toolPathParamsUrl.transform(req) // 將路徑參數轉換成匹配的 pathParams key-value
+	toolMergeSameRequest.defer(req.originUrl, req)
+	toolMethodUrl.transform(req)
+	toolPathParamsUrl.transform(req)
 	passAuthRequest(req)
-	toolParamsAndBodyParser.transform(req) // 將 params 轉成 qs, body 轉成字串
+	toolParamsAndBodyParser.transform(req)
 
 	return req
 })
@@ -51,10 +56,10 @@ fetch2.watch.response<
 	ApiResponse<any> | Promise<ApiResponse<any>>
 >(async (req, res) => {
 	checkApiPermission(req, res)
-	const _res = await commonApiResponse(req, res) // 自動將 Response 轉換成值(like: res.json())，並且統一響應格式
-	if (isLocal) toolLog.log(req, _res) // 開發運行環境下 log 響應值
+	const _res = await commonApiResponse(req, res)
 
-	toolMergeSameRequest.resolve(req.originUrl, _res) // 響應相同請求
+	if (isLocal) toolLog.log(req, _res)
+	toolMergeSameRequest.resolve(req.originUrl, _res)
 
 	return _res
 })
@@ -64,7 +69,8 @@ fetch2.watch.error<Error, MyListenerRequestInit, ApiResponse<any> | Promise<ApiR
 		const mergeResponse = await toolMergeSameRequest.waiting(req.originUrl, req, error)
 
 		if (mergeResponse !== undefined) return mergeResponse
-		if (isLocal) toolLog.error(error, req) // 開發運行環境下 log 響應值
+		if (isLocal) toolLog.error(error, req)
+
 		return commonApiErrorResponse(error, req, res)
 	},
 )
