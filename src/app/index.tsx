@@ -3,12 +3,12 @@ import { App as I18nApp, locale } from '~i18n'
 import { Routes } from '@/app/routes.tsx'
 import { App as AntdApp, ConfigProvider } from 'antd'
 import { ReactNode, useEffect, useState } from 'react'
-import { antdLocale, breakpoints, hookInstances } from '@/constants'
+import { antdLocale, breakpoints, hookInstances } from '@/constant'
 import { storage } from '@/service/store/storage.ts'
 import { Locale } from 'antd/es/locale'
-import { updateLocale } from '@/utils/locale.ts'
-import { useRwd } from '@/components/rwd-element'
-import { breakpointAtom } from '@/service/store/atoms/app.ts'
+import { updateLocale } from '@/util/locale.ts'
+import { useRwd } from '@/component/rwd-element'
+import { breakpointAtom } from '@/service/store/atom/app.ts'
 
 function App() {
 	return (

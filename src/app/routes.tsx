@@ -6,10 +6,10 @@ import {
 	useNavigate,
 } from 'react-router-dom'
 import { createPageRoutes } from '~page-routes'
-import { RouteGuard } from '@/components/route/guard.tsx'
+import { RouteGuard } from '@/component/route/guard.tsx'
 import { ReactNode, Suspense, useEffect, useMemo } from 'react'
-import { LazyError404 } from '@/components/pages/404.tsx'
-import { hookInstances } from '@/constants'
+import { LazyError404 } from '@/component/page/404.tsx'
+import { hookInstances } from '@/constant'
 
 function ErrorPageSuspense({ children }: { children: ReactNode }) {
 	return <Suspense>{children}</Suspense>

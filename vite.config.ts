@@ -12,11 +12,11 @@ import path from 'path'
 import { i18n } from 'wtbx-vite-react-i18n'
 import UnoCSS from 'unocss/vite'
 import checker from 'vite-plugin-checker'
-import { BASE_FONT_SIZE } from './.config-constants'
+import { BASE_FONT_SIZE } from './.config-constant'
 import { merge } from 'lodash-es'
 import { ClintEnv, EnvMode, EnvType } from './.env'
 import { antdLocaleImport } from 'wtbx-vite-antd-locale-import'
-import { Locale, PageMeta } from './src/types/common'
+import { Locale, PageMeta } from './src/type/common'
 
 const apiPrefix = {
 	// 開發
@@ -54,7 +54,7 @@ export default async ({ mode, command }: { mode: EnvMode; command: 'serve' | 'bu
 			autoAlias(),
 			buildDropLog(),
 			pageRoutes<PageMeta>({
-				pages: [path.resolve(process.cwd(), 'src/pages')],
+				pages: [path.resolve(process.cwd(), 'src/page')],
 				defaultMeta: {
 					homeBread: true,
 					private: true,
@@ -62,8 +62,8 @@ export default async ({ mode, command }: { mode: EnvMode; command: 'serve' | 'bu
 				},
 			}),
 			i18n({
-				uniteFilepath: path.resolve(process.cwd(), '.dictionaries.json'),
-				dirs: [path.resolve(process.cwd(), 'src/assets/locales')],
+				uniteFilepath: path.resolve(process.cwd(), '.dictionary.json'),
+				dirs: [path.resolve(process.cwd(), 'src/asset/locales')],
 			}),
 			antdLocaleImport<Locale>({
 				locales: {

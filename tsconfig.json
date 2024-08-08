@@ -26,6 +26,6 @@
       ]
     }
   },
-  "include": ["src/types/common.d.ts", "src"],
+  "include": ["src/type/common.d.ts", "src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

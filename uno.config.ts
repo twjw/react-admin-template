@@ -1,10 +1,10 @@
 import { defineConfig, presetIcons, presetUno } from 'unocss'
 import { presetRem121 } from 'wtbx-uno-preset-rem-121'
-import { BASE_FONT_SIZE } from './.config-constants'
+import { BASE_FONT_SIZE } from './.config-constant'
 import { presetAntdColorsTheme } from 'wtbx-uno-preset-antd-colors-theme'
 import transformerVariantGroup from '@unocss/transformer-variant-group'
 import transformerDirectives from '@unocss/transformer-directives'
-import { Breakpoint } from './src/constants'
+import { Breakpoint } from './src/constant'
 
 export default defineConfig({
 	presets: [

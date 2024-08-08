@@ -10,13 +10,13 @@ import { TsFetchToolParamsAndBodyParser } from 'wtbx-type-safe-fetch/tools/param
 import {
 	commonApiErrorResponse,
 	commonApiResponse,
-} from '@/service/fetch2/watch-tools/response.ts'
-import { passAuthRequest, checkApiPermission } from '@/service/fetch2/watch-tools/auth.ts'
+} from '@/service/fetch2/watch-tool/response.ts'
+import { passAuthRequest, checkApiPermission } from '@/service/fetch2/watch-tool/auth.ts'
 
 const isLocal = envConfig.vite.isLocal
 
 const fetch2 = tsFetch as unknown as TsFetchTemplate<
-	import('@/service/fetch2/api-types/user.ts').Apis,
+	import('@/service/fetch2/api-type/user.ts').Apis,
 	MyRequestInit
 >
 
