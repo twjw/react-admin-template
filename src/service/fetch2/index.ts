@@ -7,11 +7,8 @@ import { TsFetchToolMergeSameRequest } from 'wtbx-type-safe-fetch/tools/merge-sa
 import { TsFetchToolMethodUrl } from 'wtbx-type-safe-fetch/tools/method-url'
 import { TsFetchToolPathParamsUrl } from 'wtbx-type-safe-fetch/tools/path-params-url'
 import { TsFetchToolParamsAndBodyParser } from 'wtbx-type-safe-fetch/tools/params-and-body-parser'
-import {
-	commonApiErrorResponse,
-	commonApiResponse,
-} from '@/service/fetch2/watch-tool/response.ts'
-import { passAuthRequest, checkApiPermission } from '@/service/fetch2/watch-tool/auth.ts'
+import { commonApiErrorResponse, commonApiResponse } from '@/service/fetch2/helper/watch.ts'
+import { passAuthRequest, checkApiPermission } from '@/service/fetch2/helper/watch.ts'
 
 const isLocal = envConfig.vite.isLocal
 
