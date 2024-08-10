@@ -18,6 +18,7 @@ specifiers:
   '@unocss/transformer-variant-group': ^0.58.6
   '@vitejs/plugin-react-swc': ^3.6.0
   '@wymjs/react-atom': ^1.0.0
+  '@wymjs/type-safe-fetch': ^1.0.2
   antd: ^5.15.3
   body: ^5.1.0
   cac: ^6.7.14
@@ -49,7 +50,6 @@ specifiers:
   wtbx-create-value-storage: ^1.0.1
   wtbx-enum: ^2.0.2
   wtbx-merge-env: ^2.0.1
-  wtbx-type-safe-fetch: ^3.0.3
   wtbx-types: ^1.0.4
   wtbx-uno-preset-antd-colors-theme: ^1.0.3
   wtbx-uno-preset-rem-121: ^1.0.1
@@ -65,6 +65,7 @@ dependencies:
   '@ant-design/icons': 5.3.5_biqbaboplfbrettd7655fr4n2y
   '@react-spring/web': 9.7.3_biqbaboplfbrettd7655fr4n2y
   '@wymjs/react-atom': 1.0.0
+  '@wymjs/type-safe-fetch': 1.0.2
   antd: 5.15.3_biqbaboplfbrettd7655fr4n2y
   clsx: 2.1.0
   dayjs: 1.11.10
@@ -79,7 +80,6 @@ dependencies:
   react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
   wtbx-create-value-storage: 1.0.1
   wtbx-enum: 2.0.2
-  wtbx-type-safe-fetch: 3.0.3
 
 devDependencies:
   '@ant-design/colors': 7.0.2
@@ -2051,6 +2051,10 @@ packages:
     resolution: {integrity: sha512-c4vtjegDnaqpsSchlBzcdjfG/XWhLwr/6KvJT7EAQHu84u1MQMMHG7SfuCUW2cabd/mH5BsFDi80TZNCWeufuw==}
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /@wymjs/type-safe-fetch/1.0.2:
+    resolution: {integrity: sha512-pbVrVh1Wh+v5oQzEzpx3HhwQfRz6qDX1pO/ONr2ZJRFXxJPx+7chXUOcgMLboBjqxTkzt6IIigpf4QXdZnO6hw==}
     dev: false
 
   /acorn-jsx/5.3.2_acorn@8.11.3:
@@ -4857,10 +4861,6 @@ packages:
       esbuild: 0.21.2
       lodash-es: 4.17.21
     dev: true
-
-  /wtbx-type-safe-fetch/3.0.3:
-    resolution: {integrity: sha512-w7KdNENFpMjKGHchTEpUQ5jTsyeZVd4Nrf7Cr+RXeuoNasCpRF13sL2eblkVqr39oxg/kzSxoLJR0duNj3/sYA==}
-    dev: false
 
   /wtbx-types/1.0.4:
     resolution: {integrity: sha512-UGAcsapFDfnZQnFCCzc3njNviO1BD5AOF4RddriBBDfNO+feeBP31oR5D5ukEg20lbA8VSSt/dU7b/SXn/aytQ==}

@@ -1,4 +1,4 @@
-import { TsFetchTemplateDefineApis } from 'wtbx-type-safe-fetch'
+import { TsFetchTemplateDefineApis } from '@wymjs/type-safe-fetch'
 import { ApiResponse } from '@/service/fetch2/type.ts'
 
 export namespace Login {

@@ -1,48 +1,53 @@
-import { tsFetch, TsFetchTemplate } from 'wtbx-type-safe-fetch'
-import { ApiResponse, MyListenerRequestInit, MyRequestInit } from '@/service/fetch2/type.ts'
+import { createTsFetch, TsFetchTemplate } from '@wymjs/type-safe-fetch'
+import { createMockTool } from '@wymjs/type-safe-fetch/tool/mock'
+import { createMethodUrlTool } from '@wymjs/type-safe-fetch/tool/method-url'
+import { createPathParamsUrlTool } from '@wymjs/type-safe-fetch/tool/path-params-url'
+import { createParamsAndBodyParserTool } from '@wymjs/type-safe-fetch/tool/params-and-body-parser'
+import { createMergeSameRequestTool } from '@wymjs/type-safe-fetch/tool/merge-same-request'
+import { createLogTool } from '@wymjs/type-safe-fetch/tool/log'
 import { envConfig } from '~env-config'
-import { TsFetchToolMock } from 'wtbx-type-safe-fetch/tools/mock'
-import { TsFetchToolLog } from 'wtbx-type-safe-fetch/tools/log'
-import { TsFetchToolMergeSameRequest } from 'wtbx-type-safe-fetch/tools/merge-same-request'
-import { TsFetchToolMethodUrl } from 'wtbx-type-safe-fetch/tools/method-url'
-import { TsFetchToolPathParamsUrl } from 'wtbx-type-safe-fetch/tools/path-params-url'
-import { TsFetchToolParamsAndBodyParser } from 'wtbx-type-safe-fetch/tools/params-and-body-parser'
-import { commonApiErrorResponse, commonApiResponse } from '@/service/fetch2/helper/watch.ts'
-import { passAuthRequest, checkApiPermission } from '@/service/fetch2/helper/watch.ts'
+import { ApiResponse, MyListenerRequestInit, MyRequestInit } from '@/service/fetch2/type.ts'
+import {
+	commonApiErrorResponse,
+	commonApiResponse,
+	passAuthRequest,
+	checkApiPermission,
+} from '@/service/fetch2/helper/watch.ts'
 
 const isLocal = envConfig.vite.isLocal
 
-const fetch2 = tsFetch as unknown as TsFetchTemplate<
+const fetch2 = createTsFetch() as unknown as TsFetchTemplate<
 	import('@/service/fetch2/api-type/user.ts').Apis,
 	MyRequestInit
 >
 
-// 開發運行環境下支持 mock api
-const toolMock = TsFetchToolMock()
-// 將路徑的方法轉換成 method
-const toolMethodUrl = TsFetchToolMethodUrl()
+// vite 開發運行環境下支持 @wymjs/vite-mock-apis 的功能
+const mockTool = createMockTool()
+// 將路徑的方法轉換成 method，如：post:/api/hello
+const methodUrlTool = createMethodUrlTool()
 // 將路徑參數轉換成匹配的 pathParams key-value
-const toolPathParamsUrl = TsFetchToolPathParamsUrl()
-// 將 params 轉成 qs, body 轉成字串
-const toolParamsAndBodyParser = TsFetchToolParamsAndBodyParser()
-// 開發運行環境下 log 響應值
-const toolLog = TsFetchToolLog<Error, MyListenerRequestInit, ApiResponse<any>>()
-// 合併相同請求
-const toolMergeSameRequest = TsFetchToolMergeSameRequest<
+// 比方說：fetch2('/api/user/:id', { pathParams: { id: '1' } })
+const pathParamsUrlTool = createPathParamsUrlTool()
+// 將 params 轉成 querystring 以及 body 自動轉成字串傳入
+const paramsAndBodyParserTool = createParamsAndBodyParserTool()
+// 合併相同路徑請求，可以迴圈 call 相同路徑的 api 確認是否只 call 一次 api
+const mergeSameRequestTool = createMergeSameRequestTool<
 	Error,
 	MyListenerRequestInit,
 	ApiResponse<any>
 >()
+// vite 開發運行環境下 log 響應值(可選)
+const logTool = createLogTool<Error, MyListenerRequestInit, ApiResponse<any>>()
 
 fetch2.watch.request<MyListenerRequestInit>(req => {
-	if (isLocal) toolMock.transform(req)
+	if (isLocal) mockTool.transform(req)
 
 	req.originUrl = req.url
-	toolMergeSameRequest.defer(req.originUrl, req)
-	toolMethodUrl.transform(req)
-	toolPathParamsUrl.transform(req)
+	mergeSameRequestTool.defer(req.originUrl, req)
+	methodUrlTool.transform(req)
+	pathParamsUrlTool.transform(req)
 	passAuthRequest(req)
-	toolParamsAndBodyParser.transform(req)
+	paramsAndBodyParserTool.transform(req)
 
 	return req
 })
@@ -55,18 +60,18 @@ fetch2.watch.response<
 	checkApiPermission(req, res)
 	const _res = await commonApiResponse(req, res)
 
-	if (isLocal) toolLog.log(req, _res)
-	toolMergeSameRequest.resolve(req.originUrl, _res)
+	if (isLocal) logTool.log(req, _res)
+	mergeSameRequestTool.resolve(req.originUrl, _res)
 
 	return _res
 })
 
 fetch2.watch.error<Error, MyListenerRequestInit, ApiResponse<any> | Promise<ApiResponse<any>>>(
 	async (error, req, res) => {
-		const mergeResponse = await toolMergeSameRequest.waiting(req.originUrl, req, error)
+		const mergeResponse = await mergeSameRequestTool.waiting(req.originUrl, req, error)
 
 		if (mergeResponse !== undefined) return mergeResponse
-		if (isLocal) toolLog.error(error, req)
+		if (isLocal) logTool.error(error, req)
 
 		return commonApiErrorResponse(error, req, res)
 	},

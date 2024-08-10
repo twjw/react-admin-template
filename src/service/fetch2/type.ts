@@ -1,4 +1,4 @@
-import { TsFetchListenerRequestInit } from 'wtbx-type-safe-fetch'
+import { TsFetchListenerRequestInit } from '@wymjs/type-safe-fetch'
 
 export type ApiResponse<T> = {
 	success: boolean
@@ -7,9 +7,11 @@ export type ApiResponse<T> = {
 }
 
 export type MyRequestInitOther = {
-	responseType?: 'json' | 'text' // auto-response 用，default: json
+	// auto-response 用，default: json
+	responseType?: 'json' | 'text'
 	originUrl: string
-	_mri_: number // merge-same-request 用
+	// tool/merge-same-request 需要用到的參數
+	_mri_: number
 }
 
 export type MyListenerRequestInit = TsFetchListenerRequestInit & MyRequestInitOther
