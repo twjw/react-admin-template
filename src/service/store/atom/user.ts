@@ -1,4 +1,4 @@
 import { Profile } from '@/service/fetch2/api-type/user.ts'
-import { watom } from 'wtbx-react-atom'
+import { atom } from '@wymjs/react-atom'
 
-export const userProfileAtom = watom<null | Profile.Response>(null)
+export const userProfileAtom = atom<null | Profile.Response>(null)
