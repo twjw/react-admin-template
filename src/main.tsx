@@ -1,6 +1,6 @@
+import 'virtual:uno.css'
 import '@/style/eric-reset.css'
 import '@/style/common.css'
-import 'virtual:uno.css'
 import { createRoot } from 'react-dom/client'
 import { App } from '@/app'
 
