@@ -19,7 +19,7 @@
     "@ant-design/icons": "^5.3.5",
     "@react-spring/web": "^9.7.3",
     "@wymjs/react-atom": "^1.0.0",
-    "@wymjs/type-safe-fetch": "^1.0.2",
+    "@wymjs/type-safe-fetch": "^1.0.3",
     "antd": "^5.15.3",
     "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
