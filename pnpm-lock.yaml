@@ -13,11 +13,10 @@ specifiers:
   '@types/react-dom': ^18.2.22
   '@typescript-eslint/eslint-plugin': ^7.3.1
   '@typescript-eslint/parser': ^7.3.1
-  '@unocss/core': ^0.58.6
   '@unocss/transformer-directives': ^0.59.0
   '@unocss/transformer-variant-group': ^0.58.6
   '@vitejs/plugin-react-swc': ^3.6.0
-  '@wymjs/react-atom': ^1.0.0
+  '@wymjs/react-atom': ^1.0.4
   '@wymjs/type-safe-fetch': ^1.0.2
   antd: ^5.15.3
   body: ^5.1.0
@@ -64,7 +63,7 @@ specifiers:
 dependencies:
   '@ant-design/icons': 5.3.5_biqbaboplfbrettd7655fr4n2y
   '@react-spring/web': 9.7.3_biqbaboplfbrettd7655fr4n2y
-  '@wymjs/react-atom': 1.0.0
+  '@wymjs/react-atom': 1.0.4
   '@wymjs/type-safe-fetch': 1.0.2
   antd: 5.15.3_biqbaboplfbrettd7655fr4n2y
   clsx: 2.1.0
@@ -92,7 +91,6 @@ devDependencies:
   '@types/react-dom': 18.2.22
   '@typescript-eslint/eslint-plugin': 7.3.1_lds66usmo4fnsol24zmrkcxz3e
   '@typescript-eslint/parser': 7.3.1_etjje6qigiul5ehv6jbvvk4jai
-  '@unocss/core': 0.58.6
   '@unocss/transformer-directives': 0.59.0
   '@unocss/transformer-variant-group': 0.58.6
   '@vitejs/plugin-react-swc': 3.6.0_vite@5.2.6
@@ -2047,8 +2045,8 @@ packages:
       - '@swc/helpers'
     dev: true
 
-  /@wymjs/react-atom/1.0.0:
-    resolution: {integrity: sha512-c4vtjegDnaqpsSchlBzcdjfG/XWhLwr/6KvJT7EAQHu84u1MQMMHG7SfuCUW2cabd/mH5BsFDi80TZNCWeufuw==}
+  /@wymjs/react-atom/1.0.4:
+    resolution: {integrity: sha512-wBZT3tyhu9K4wofDt+fbuMiKOfXf1azup2NBSwoHuLiPxsNKJPWRP6qQSVfEOuuBg8vuxpKpcoQn+1+M9+T2HA==}
     dependencies:
       react: 18.2.0
     dev: false

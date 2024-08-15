@@ -18,7 +18,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.3.5",
     "@react-spring/web": "^9.7.3",
-    "@wymjs/react-atom": "^1.0.0",
+    "@wymjs/react-atom": "^1.0.4",
     "@wymjs/type-safe-fetch": "^1.0.2",
     "antd": "^5.15.3",
     "clsx": "^2.1.0",
@@ -46,7 +46,6 @@
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
-    "@unocss/core": "^0.58.6",
     "@unocss/transformer-directives": "^0.59.0",
     "@unocss/transformer-variant-group": "^0.58.6",
     "@vitejs/plugin-react-swc": "^3.6.0",

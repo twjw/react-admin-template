@@ -15,7 +15,7 @@ export default defineConfig({
 				'vertical-align': 'middle',
 			},
 		}),
-		presetAntdColorsTheme() as any,
+		presetAntdColorsTheme(),
 		presetRem121({ baseFontSize: BASE_FONT_SIZE }) as any,
 	],
 	transformers: [transformerVariantGroup() as any, transformerDirectives() as any],
