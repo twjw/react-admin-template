@@ -1,7 +1,9 @@
+import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { bootstrapCac } from './util/cac'
 import { ParsedOption } from './type/common'
 
+const SL = path.normalize('/')
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 const DEFAULT_MODE = 'production'
 const cliOptions = [
