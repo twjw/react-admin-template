@@ -12,7 +12,7 @@ import {
 	commonApiResponse,
 	passAuthRequest,
 	checkApiPermission,
-} from '@/service/fetch2/helper/watch.ts'
+} from '@/service/fetch2/util/watch.ts'
 
 const isLocal = envConfig.vite.isLocal
 

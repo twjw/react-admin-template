@@ -2,7 +2,7 @@ import { ErrorBoundary } from '@/component/error-boundary.tsx'
 import { ReactNode, Suspense, useEffect } from 'react'
 import { usePageRoute } from '~page-routes'
 import { userProfileAtom } from '@/service/store/atom/user.ts'
-import { getUserProfile } from '@/service/fetch2/helper/user.ts'
+import { getUserProfile } from '@/service/fetch2/util/user.ts'
 import { LazyError404 } from '@/component/page/404.tsx'
 import { storage } from '@/service/store/storage.ts'
 
