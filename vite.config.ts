@@ -63,7 +63,7 @@ export default async ({ mode, command }: { mode: EnvMode; command: 'serve' | 'bu
 			}),
 			i18n({
 				uniteFilepath: path.resolve(process.cwd(), '.dictionary.json'),
-				dirs: [path.resolve(process.cwd(), 'src/asset/locales')],
+				dirs: [path.resolve(process.cwd(), 'src/asset/locale')],
 			}),
 			antdLocaleImport<Locale>({
 				locales: {

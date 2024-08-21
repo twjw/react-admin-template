@@ -4,7 +4,7 @@ declare module '~i18n' {
 	import { Locale as _Locale } from '@/type/common'
 
 	export type Locale = _Locale
-	export type Dictionary = typeof import('@/asset/locales/zh_TW.ts').default
+	export type Dictionary = typeof import('@/asset/locale/zh_TW.ts').default
 	export type KeyofDictionary = RecursiveKeyOf<Dictionary>
 	export const dictionary: Dictionary
 	export const locale: Locale
