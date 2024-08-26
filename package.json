@@ -15,6 +15,10 @@
     "*.{js,jsx,ts,tsx}": "pnpm run lint",
     "*.{js,jsx,ts,tsx,css,sass,scss,less}": "pnpm run format"
   },
+  "engines": {
+    "node": "^14.18.0 || >=16.0.0"
+  },
+  "packageManager": "pnpm@7.5.1",
   "dependencies": {
     "@ant-design/icons": "^5.3.5",
     "@react-spring/web": "^9.7.3",
