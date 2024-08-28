@@ -9,8 +9,7 @@
     "lint": "eslint --fix --no-ignore --max-warnings=0",
     "format": "prettier --cache --write",
     "preview": "vite preview",
-    "prepare": "husky install",
-    "postinstall": "node build-recipe/postinstall.js"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "pnpm run lint",
